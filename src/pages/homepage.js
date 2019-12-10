@@ -17,7 +17,7 @@ function Homepage(props) {
               uid: user.uid
             })
             .then(res => {
-              setUser(res.data);
+              if (res.data && res.data.uid) setUser(res.data);
             });
         } else setUser(null);
       });
@@ -35,19 +35,17 @@ function Homepage(props) {
         <>
           <p>{user.email}</p>
           <p>{user.fullName}</p>
-          <p>{user.ticketCode}</p>
+          <p>{user.checked.ticketCode}</p>
           <p>
-            <QRCode value={user.ticketCode} level="H" renderAs="canvas" />
+            <QRCode value={user.checked.ticketCode} level="H" />
           </p>
           <button onClick={signOut}>sign out</button>
         </>
       )}
       {!user && (
-        <button onClick={() => props.history.push("/register")}>
-          register
-        </button>
+        <button onClick={() => props.history.push("/register")}>sign in</button>
       )}
-    </div>  
+    </div>
   );
 }
 

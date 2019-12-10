@@ -8,7 +8,12 @@ exports.register = (req, res) => {
     email: req.body.email,
     fullName: req.body.fullName,
     phoneNumber: req.body.phoneNumber,
-    ticketCode: randomize("Aa0", 10),
+    checked: {
+      ticketCode: randomize("Aa0", 10),
+      checkedIn: false,
+      checkedAt: ""
+    },
+    gift: {},
     createdAt: new Date().toISOString()
   };
   const { errors, invalid } = validateRegister(
@@ -50,7 +55,8 @@ exports.user = (req, res) => {
           email: doc.data().email,
           fullName: doc.data().fullName,
           phoneNumber: doc.data().phoneNumber,
-          ticketCode: doc.data().ticketCode,
+          checked: doc.data().checked,
+          gift: doc.data().gift,
           createdAt: doc.data().createdAt
         };
       });
