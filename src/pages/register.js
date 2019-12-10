@@ -36,7 +36,7 @@ function Register(props) {
       .then(confirmResult =>
         setAuth({ ...auth, confirmResult, message: "code has been sent" })
       )
-      .catch(err => setAuth({ ...auth, message: `invalid phone number` }));
+      .catch(err => setAuth({ ...auth, message: "invalid phone number" }));
   };
 
   const confirmCode = () => {
@@ -44,7 +44,7 @@ function Register(props) {
       auth.confirmResult
         .confirm(auth.codeInput)
         .then(() => setAuth({ ...auth, message: "code confirmed" }))
-        .catch(() => setAuth({ ...auth, message: `invalid code` }));
+        .catch(() => setAuth({ ...auth, message: "invalid code" }));
     }
   };
 
@@ -58,14 +58,18 @@ function Register(props) {
         onChange={handleInput}
         value={auth.phoneNumber}
       />
-      <button onClick={signIn}>sign in</button>
+      <p>
+        <button onClick={signIn}>sign in</button>
+      </p>
     </div>
   );
 
   const verifyInput = (
     <div>
       <input name="codeInput" onChange={handleInput} value={auth.codeInput} />
-      <button onClick={confirmCode}>confirm</button>
+      <p>
+        <button onClick={confirmCode}>confirm</button>
+      </p>
     </div>
   );
 

@@ -13,7 +13,7 @@ function Scanner() {
   };
 
   const handleError = error => {
-    if (error) setResult({ ...result, error: error.message.toLowerCase() });
+    if (error) setResult({ ...result, error: "device not found" });
   };
 
   return (
