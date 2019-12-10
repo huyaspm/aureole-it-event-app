@@ -36,7 +36,7 @@ function Register(props) {
       .then(confirmResult =>
         setAuth({ ...auth, confirmResult, message: "code has been sent" })
       )
-      .catch(() => setAuth({ ...auth, message: `invalid phone number` }));
+      .catch(err => setAuth({ ...auth, message: `invalid phone number` }));
   };
 
   const confirmCode = () => {

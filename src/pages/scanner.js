@@ -8,12 +8,12 @@ const style = {
 function Scanner() {
   const [result, setResult] = useState({});
 
-  const handleScan = data => { 
+  const handleScan = data => {
     if (data) setResult({ ...result, code: data });
   };
 
-  const handleError = data => {
-    if (data) setResult({ ...result, error: data });
+  const handleError = error => {
+    if (error) setResult({ ...result, error: error.message.toLowerCase() });
   };
 
   return (
@@ -23,6 +23,8 @@ function Scanner() {
         onScan={handleScan}
         style={style}
         onError={handleError}
+        facingMode="environment"
+        showViewFinder={false}
       />
       <p>{result.code}</p>
       <p>{result.error}</p>

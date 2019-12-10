@@ -1,6 +1,6 @@
 const { firestore } = require("../utils/admin");
 const { validateRegister } = require("../utils/validate");
-const randomize = require('randomatic');
+const randomize = require("randomatic");
 
 exports.register = (req, res) => {
   const user = {
@@ -8,7 +8,7 @@ exports.register = (req, res) => {
     email: req.body.email,
     fullName: req.body.fullName,
     phoneNumber: req.body.phoneNumber,
-    ticketCode: randomize('Aa0', 10),
+    ticketCode: randomize("Aa0", 10),
     createdAt: new Date().toISOString()
   };
   const { errors, invalid } = validateRegister(

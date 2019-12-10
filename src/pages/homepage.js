@@ -47,7 +47,7 @@ function Homepage(props) {
           register
         </button>
       )}
-    </div>
+    </div>  
   );
 }
 
