@@ -6,18 +6,27 @@ const styleScan = {
   width: "256px"
 };
 
-const checkIn = (code) => {
-  console.log(code)
-}
-
 function Scanner() {
   const [result, setResult] = useState({});
+  const [user, setUser] = useState();
 
   useEffect(() => {
     if (result.code) {
-      if(Object.values(result.code).length >= 10) {
-        checkIn(result.code)
-        setResult({...result, code: ''})
+      const code = result.code;
+      if (Object.values(code).length === 10) {
+        axios
+          .post("/manager/scan", {
+            ticketCode: code
+          })
+          .then(res => {
+            if (res && res.data) return setUser(res.data);
+          })
+          .then();
+        setResult({ ...result, code: "", error: "" });
+        setUser(null);
+      }
+      if (Object.values(code).length > 10) {
+        setResult({ ...result, code: "", error: "invalid ticket code" });
       }
     }
   }, [result]);
@@ -52,6 +61,7 @@ function Scanner() {
         />
       </p>
       <p>{result.error}</p>
+      {user && user.uid && <p>{user.email}</p>}
     </div>
   );
 }

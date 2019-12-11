@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+
+import Countdown from "../components/countdown";
 
 function Template() {
   return (
     <div>
-      
+      <Countdown />
     </div>
   );
 }

@@ -13,7 +13,12 @@ exports.register = (req, res) => {
       checkedIn: false,
       checkedAt: ""
     },
-    gift: {},
+    gifts: {
+      luckyMoney: "",
+      luckyNumber: "",
+      gift: "",
+      taken: false
+    },
     createdAt: new Date().toISOString()
   };
   const { errors, invalid } = validateRegister(
@@ -48,21 +53,77 @@ exports.user = (req, res) => {
     .where("uid", "==", req.body.uid)
     .get()
     .then(data => {
-      var user = {};
-      data.forEach(doc => {
-        user = {
-          uid: req.body.uid,
-          email: doc.data().email,
-          fullName: doc.data().fullName,
-          phoneNumber: doc.data().phoneNumber,
-          checked: doc.data().checked,
-          gift: doc.data().gift,
-          createdAt: doc.data().createdAt
-        };
-      });
-      return res.json(user);
+      if (!data.empty) {
+        data.forEach(doc => {
+          const user = {
+            id: doc.id,
+            uid: req.body.uid,
+            email: doc.data().email,
+            fullName: doc.data().fullName,
+            phoneNumber: doc.data().phoneNumber,
+            checked: doc.data().checked,
+            gifts: doc.data().gifts,
+            createdAt: doc.data().createdAt
+          };
+          return res.json(user);
+        });
+      } else {
+        return res.status(400).json({ handle: "user not found" });
+      }
     })
     .catch(() =>
       res.status(500).json({ error: "something went wrong, try again" })
+    );
+};
+
+exports.status = (req, res) => {
+  firestore
+    .collection("users")
+    .doc(req.body.id)
+    .onSnapshot(
+      doc => {
+        if (doc.exists) {
+          if (doc.data().checked.checkedIn) {
+            const user = {
+              id: doc.id,
+              uid: doc.data().uid,
+              email: doc.data().email,
+              fullName: doc.data().fullName,
+              phoneNumber: doc.data().phoneNumber,
+              checked: doc.data().checked,
+              gifts: doc.data().gifts,
+              createdAt: doc.data().createdAt
+            };
+            return res.json(user);
+          }
+        } else {
+          return res.status(400).json({ handle: "user not found" });
+        }
+      },
+      () => {
+        return res
+          .status(500)
+          .json({ error: "something went wrong, try again" });
+      }
+    );
+};
+
+exports.taken = (req, res) => {
+  firestore
+    .collection("users")
+    .doc(req.body.id)
+    .onSnapshot(
+      doc => {
+        if (doc.exists) {
+          if (doc.data().gifts.taken) return res.json(doc.data());
+        } else {
+          return res.status(400).json({ handle: "user not found" });
+        }
+      },
+      () => {
+        return res
+          .status(500)
+          .json({ error: "something went wrong, try again" });
+      }
     );
 };

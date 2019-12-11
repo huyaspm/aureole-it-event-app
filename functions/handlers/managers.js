@@ -1,5 +1,6 @@
 const { firestore } = require("../utils/admin");
 const bcrypt = require("bcryptjs");
+const randomize = require("randomatic");
 
 exports.manager = async (req, res) => {
   firestore
@@ -31,7 +32,7 @@ exports.manager = async (req, res) => {
 
 exports.create = async (req, res) => {
   if (req.body.username.trim() === "" || req.body.password.trim() === "")
-    return res.status(500).json({ error: "imput must not be empty" });
+    return res.status(500).json({ error: "input must not be empty" });
   const password = await bcrypt.hash(req.body.password, 12);
   const manager = {
     username: req.body.username,
@@ -51,6 +52,50 @@ exports.create = async (req, res) => {
           });
       } else
         return res.status(400).json({ handle: "username is already taken" });
+    })
+    .catch(() =>
+      res.status(500).json({ error: "something went wrong, try again" })
+    );
+};
+
+exports.scan = async (req, res) => {
+  firestore
+    .collection("users")
+    .where("checked.ticketCode", "==", req.body.ticketCode)
+    .get()
+    .then(data => {
+      if (data.empty) {
+        return res.status(400).json({ handle: "invalid ticket code" });
+      } else {
+        data.forEach(async doc => {
+          if (doc.data().checked.checkedIn) {
+            return res.status(401).json({ handle: "already checked" });
+          } else {
+            var luckyNumber = randomize("0", 3);
+            var similar = false;
+            while (!similar) {
+              await firestore
+                .collection("users")
+                .where("gifts.luckyNumber", "==", luckyNumber)
+                .get()
+                .then(data => {
+                  if (data.empty) similar = true;
+                  else luckyNumber = randomize("0", 3);
+                  console.log(luckyNumber);
+                });
+            }
+            var user = doc.data();
+            user.checked.checkedIn = true;
+            user.checked.checkedAt = new Date().toISOString();
+            user.gifts.luckyNumber = luckyNumber;
+            firestore
+              .collection("users")
+              .doc(doc.id)
+              .set(user);
+            return res.json(user);
+          }
+        });
+      }
     })
     .catch(() =>
       res.status(500).json({ error: "something went wrong, try again" })

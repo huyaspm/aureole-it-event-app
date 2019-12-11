@@ -7,6 +7,7 @@ import QRCode from "qrcode.react";
 function Homepage(props) {
   const [user, setUser] = useState();
   const [mount, setMount] = useState(false);
+  const [, forceUpdate] = React.useState(0);
 
   useEffect(() => {
     if (!mount) {
@@ -17,7 +18,44 @@ function Homepage(props) {
               uid: user.uid
             })
             .then(res => {
-              if (res.data && res.data.uid) setUser(res.data);
+              if (res.data && res.data.uid) {
+                setUser(res.data);
+                return {
+                  id: res.data.id,
+                  checked: res.data.checked.checkedIn
+                };
+              }
+            })
+            .then(res => {
+              if (!res.checked) {
+                axios
+                  .post("/status", {
+                    id: res.id
+                  })
+                  .then(res => {
+                    if (res.data && res.data.checked.checkedIn) {
+                      setUser(res.data);
+                      forceUpdate(up => !up);
+                      axios
+                        .post("/taken", {
+                          id: res.data.id
+                        })
+                        .then(res => {
+                          setUser(res.data);
+                          forceUpdate(up => !up);
+                        });
+                    }
+                  })
+              } else {
+                axios
+                  .post("/taken", {
+                    id: res.id
+                  })
+                  .then(res => {
+                    setUser(res.data);
+                    forceUpdate(up => !up);
+                  });
+              }
             });
         } else setUser(null);
       });
@@ -31,7 +69,7 @@ function Homepage(props) {
 
   return (
     <div>
-      {user && (
+      {user && !user.checked.checkedIn && (
         <>
           <p>{user.email}</p>
           <p>{user.fullName}</p>
@@ -39,6 +77,25 @@ function Homepage(props) {
           <p>
             <QRCode value={user.checked.ticketCode} level="H" />
           </p>
+          <button onClick={signOut}>sign out</button>
+        </>
+      )}
+      {user && user.checked.checkedIn && (
+        <>
+          <p>{user.email}</p>
+          <p>{user.fullName}</p>
+          {!user.gifts.taken && (
+            <>
+            <p>{user.gifts.gift}</p>
+            <p>{user.gifts.luckyMoney}</p>
+            </>
+          )}
+          {user.gifts.taken && (
+            <>
+            <p>{user.gifts.gift} <em>(đã nhận)</em></p>
+            <p>{user.gifts.luckyMoney} <em>(đã nhận)</em></p>
+            </>
+          )}
           <button onClick={signOut}>sign out</button>
         </>
       )}
