@@ -68,7 +68,7 @@ function Register(props) {
   };
 
   const updateDetail = () => {
-    const email = auth.email + "@ait.vn";
+    const email = auth.email + "@ait.com";
     axios
       .post("/register", {
         uid: auth.user.uid,
@@ -110,7 +110,7 @@ function Register(props) {
       <p>{auth.user && auth.user.phoneNumber}</p>
       <p>
         <input name="email" onChange={handleInput} value={auth.email} />
-        @ait.vn
+        @ait.com
       </p>
       <p>
         <input name="fullName" onChange={handleInput} value={auth.fullName} />

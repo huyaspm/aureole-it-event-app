@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./app.scss";
+
 import Homepage from "./pages/homepage";
 import Register from "./pages/register";
 import Scanner from "./pages/scanner";

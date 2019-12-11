@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import QrReader from "react-qr-reader";
 import axios from "axios";
 
-const style = {
+const styleScan = {
   width: "256px"
 };
 
@@ -35,14 +35,14 @@ function Scanner() {
 
   return (
     <div>
-      {/* <QrReader
+      <QrReader
         delay={300}
         onScan={handleScan}
-        style={style}
+        style={styleScan}
         onError={handleError}
         facingMode="environment"
         showViewFinder={false}
-      /> */}
+      />
       <p>
         <input
           name="code"
