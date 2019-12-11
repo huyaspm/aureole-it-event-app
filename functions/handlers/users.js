@@ -2,14 +2,26 @@ const { firestore } = require("../utils/admin");
 const { validateRegister } = require("../utils/validate");
 const randomize = require("randomatic");
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
+  var ticketCode = randomize("Aa0", 10);
+  var similar = false;
+  while (!similar) {
+    await firestore
+      .collection("users")
+      .where("checked.ticketCode", "==", ticketCode)
+      .get()
+      .then(data => {
+        if (data.empty) similar = true;
+        else ticketCode = randomize("Aa0", 10);
+      });
+  }
   const user = {
     uid: req.body.uid,
     email: req.body.email,
     fullName: req.body.fullName,
     phoneNumber: req.body.phoneNumber,
     checked: {
-      ticketCode: randomize("Aa0", 10),
+      ticketCode: ticketCode,
       checkedIn: false,
       checkedAt: ""
     },

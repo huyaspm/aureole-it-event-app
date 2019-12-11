@@ -81,7 +81,6 @@ exports.scan = async (req, res) => {
                 .then(data => {
                   if (data.empty) similar = true;
                   else luckyNumber = randomize("0", 3);
-                  console.log(luckyNumber);
                 });
             }
             var user = doc.data();
