@@ -29,7 +29,8 @@ exports.register = async (req, res) => {
       luckyMoney: "",
       luckyNumber: "",
       gift: "",
-      taken: false
+      taken: false,
+      takenAt: ""
     },
     createdAt: new Date().toISOString()
   };

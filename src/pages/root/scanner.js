@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import QrReader from "react-qr-reader";
 import axios from "axios";
+import { ManagerContext } from "../../utils/manager";
 
 const styleScan = {
   width: "256px"
 };
 
 function Scanner() {
+  const context = useContext(ManagerContext);
   const [result, setResult] = useState({});
   const [user, setUser] = useState();
 
@@ -62,6 +64,7 @@ function Scanner() {
       </p>
       <p>{result.error}</p>
       {user && user.uid && <p>{user.email}</p>}
+      <button onClick={context.signOut}>sign out</button>
     </div>
   );
 }
