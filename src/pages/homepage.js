@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../config/firebase-config";
-import axios from "axios";
-
 import QRCode from "qrcode.react";
+import axios from "axios";
 
 function Homepage(props) {
   const [user, setUser] = useState();
   const [mount, setMount] = useState(false);
-  const [, forceUpdate] = React.useState(0);
 
   useEffect(() => {
     if (!mount) {
@@ -18,47 +16,11 @@ function Homepage(props) {
               uid: user.uid
             })
             .then(res => {
-              if (res.data && res.data.uid) {
-                setUser(res.data);
-                return {
-                  id: res.data.id,
-                  checked: res.data.checked.checkedIn
-                };
-              }
-            })
-            .then(res => {
-              if (!res.checked) {
-                axios
-                  .post("/status", {
-                    id: res.id
-                  })
-                  .then(res => {
-                    if (res.data && res.data.checked.checkedIn) {
-                      setUser(res.data);
-                      forceUpdate(up => !up);
-                      axios
-                        .post("/taken", {
-                          id: res.data.id
-                        })
-                        .then(res => {
-                          setUser(res.data);
-                          forceUpdate(up => !up);
-                        });
-                    }
-                  })
-              } else {
-                axios
-                  .post("/taken", {
-                    id: res.id
-                  })
-                  .then(res => {
-                    setUser(res.data);
-                    forceUpdate(up => !up);
-                  });
-              }
+              if (res.data && res.data.uid) setUser(res.data);
             });
         } else setUser(null);
       });
+
       setMount(true);
     }
   }, [user, mount]);
@@ -86,14 +48,18 @@ function Homepage(props) {
           <p>{user.fullName}</p>
           {!user.gifts.taken && (
             <>
-            <p>{user.gifts.gift}</p>
-            <p>{user.gifts.luckyMoney}</p>
+              <p>{user.gifts.gift}</p>
+              <p>{user.gifts.luckyMoney}</p>
             </>
           )}
           {user.gifts.taken && (
             <>
-            <p>{user.gifts.gift} <em>(đã nhận)</em></p>
-            <p>{user.gifts.luckyMoney} <em>(đã nhận)</em></p>
+              <p>
+                {user.gifts.gift} <em>(đã nhận)</em>
+              </p>
+              <p>
+                {user.gifts.luckyMoney} <em>(đã nhận)</em>
+              </p>
             </>
           )}
           <button onClick={signOut}>sign out</button>

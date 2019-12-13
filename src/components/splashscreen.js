@@ -1,5 +1,4 @@
 import React from "react";
-import "./splashscreen.scss";
 
 const Splash = () => {
   return (

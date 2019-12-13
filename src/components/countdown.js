@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./countdown.scss";
 
 const initialState = {
   years: 0,
@@ -56,30 +55,22 @@ function Countdown() {
   };
 
   return (
-    <div className="countdown">
-      <div className="countdown-column">
-        <div className="countdown-element">
-          <strong>{format(countdown.days)}</strong>
-          <div>NGÀY</div>
-        </div>
+    <div id="timer" className="d-flex mb-5">
+      <div className="time pl-3">
+        {format(countdown.days)}
+        <span>Days</span>
       </div>
-      <div className="countdown-column">
-        <div className="countdown-element">
-          <strong>{format(countdown.hours)}</strong>
-          <div>GIỜ</div>
-        </div>
+      <div className="time pl-3">
+        {format(countdown.hours)}
+        <span>Hours</span>
       </div>
-      <div className="countdown-column">
-        <div className="countdown-element">
-          <strong>{format(countdown.minutes)}</strong>
-          <div>PHÚT</div>
-        </div>
+      <div className="time pl-3">
+        {format(countdown.minutes)}
+        <span>Minutes</span>
       </div>
-      <div className="countdown-column">
-        <div className="countdown-element">
-          <strong>{format(countdown.seconds)}</strong>
-          <div>GIÂY</div>
-        </div>
+      <div className="time pl-3">
+        {format(countdown.seconds)}
+        <span>Seconds</span>
       </div>
     </div>
   );

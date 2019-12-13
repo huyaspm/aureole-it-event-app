@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 import "./app.scss";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Splash from './components/splashscreen'
 
 import Homepage from "./pages/homepage";
 import Register from "./pages/register";
@@ -14,10 +16,18 @@ import ManagerRoute from "./route/manager";
 import Scanner from "./pages/root/scanner";
 import Manager from "./pages/root/manager";
 
-// axios.defaults.baseURL = 'https://asia-east2-ait-app.cloudfunctions.net/api'
+axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
 
 function App() {
-  return (
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setReady(true);
+    }, 1000);
+  });
+
+  return ready ? (
     <Router>
       <Switch>
         <Route exact path="/" component={Homepage} />
@@ -30,6 +40,8 @@ function App() {
         <Route exact component={Notfound} />
       </Switch>
     </Router>
+  ) : (
+    <Splash />
   );
 }
 
