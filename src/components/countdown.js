@@ -62,19 +62,19 @@ function Countdown() {
     <div id="timer" className="d-flex mb-5">
       <div className="time pl-3">
         {format(countdown.days)}
-        <span>Days</span>
+        <span>Ngày</span>
       </div>
       <div className="time pl-3">
         {format(countdown.hours)}
-        <span>Hours</span>
+        <span>Giờ</span>
       </div>
       <div className="time pl-3">
         {format(countdown.minutes)}
-        <span>Minutes</span>
+        <span>Phút</span>
       </div>
       <div className="time pl-3">
         {format(countdown.seconds)}
-        <span>Seconds</span>
+        <span>Giây</span>
       </div>
     </div>
   ) : (
