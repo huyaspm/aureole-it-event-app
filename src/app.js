@@ -13,14 +13,15 @@ import Manager from "./pages/root/manager";
 import Checker from "./pages/root/checker";
 import Giver from "./pages/root/giver";
 import Spinner from "./pages/root/spinner";
+import Admin from "./pages/root/admin";
 
 import Splash from "./components/splashscreen";
 import Homepage from "./pages/homepage";
 import Signin from "./pages/sign-in";
 import Update from "./pages/update";
 
-axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
-// axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
+// axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
+axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
 
 function App() {
   const [ready, setReady] = useState(false);
@@ -43,6 +44,7 @@ function App() {
             <ManagerRoute exact path="/root/scanner" component={Checker} />
             <ManagerRoute exact path="/root/giver" component={Giver} />
             <ManagerRoute exact path="/root/lucky-number" component={Spinner} />
+            <ManagerRoute exact path="/root/admin" component={Admin} />
             <Route component={Homepage} />
           </Switch>
         </Router>

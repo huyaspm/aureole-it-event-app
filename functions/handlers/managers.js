@@ -55,14 +55,16 @@ exports.create = async (req, res) => {
   if (req.body.username.trim() === "" || req.body.password.trim() === "")
     return res.status(500).json({ error: "input must not be empty" });
   const password = await bcrypt.hash(req.body.password, 12);
+  const type = parseInt(req.body.permission);
+  const permission = {
+    type: type,
+    job: type === 0 ? "root" : "staff"
+  };
   const manager = {
     username: req.body.username,
     password: password,
     createdAt: new Date().toISOString(),
-    permission: {
-      type: 1,
-      job: "checkIn"
-    }
+    permission: permission
   };
   firestore
     .collection("managers")
@@ -139,7 +141,8 @@ exports.give = async (req, res) => {
         return res.status(400).json({ handle: "user not found" });
       } else {
         data.forEach(async doc => {
-          if (!doc.data().checked.checkedIn) return res.status(402).json({ handle: "not checked" });
+          if (!doc.data().checked.checkedIn)
+            return res.status(402).json({ handle: "not checked" });
           if (doc.data().gifts.taken) {
             return res.status(401).json({ handle: "was given" });
           } else {

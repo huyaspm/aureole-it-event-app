@@ -114,7 +114,7 @@ function Homepage(props) {
           size="256"
         ></QRCode>
       </div>
-      <div className="form-group mt-4">
+      <div className="form-group mt-5">
         <button
           onClick={() => {
             signOut();
@@ -161,7 +161,7 @@ function Homepage(props) {
           <strong>Chúc bạn tham gia tiệc vui vẻ!</strong>
         </label>
       </div>
-      <div className="form-group mt-4">
+      <div className="form-group mt-5">
         <button
           onClick={() => {
             signOut();

@@ -42,7 +42,8 @@ function Giver(props) {
       })
       .catch(err => {
         if (err && err.response.status === 400) setMessage("Không tìm thấy mã");
-        if (err && err.response.status === 401) setMessage("Đã trao quà cho mã này");
+        if (err && err.response.status === 401)
+          setMessage("Đã trao quà cho mã này");
         if (err && err.response.status === 402)
           setMessage("Mã này chưa quét tham gia");
       });
@@ -90,7 +91,15 @@ function Giver(props) {
           <div className="col-xl-3 col-lg-3 col-md-1" />
           <div className="col-xl-6 col-lg-6 col-md-10">
             <div className="request-form">
-              <h2>Quét trao quà</h2>
+              <div className="d-flex mt-2 back-button">
+                <button
+                  onClick={() => props.history.goBack()}
+                  className="btn btn-light"
+                >
+                  <i class="fa fa-arrow-left" />
+                </button>
+                <h2 className="ml-4">Quét trao quà</h2>
+              </div>
               <div className="form-group mt-5">
                 <QrReader
                   delay={1000}

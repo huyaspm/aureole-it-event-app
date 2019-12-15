@@ -20,7 +20,7 @@ function Spinner() {
 
   const stopSpinner = data => {
     if (stop) setSpeed(speed + 5);
-    if (speed >= 300) {
+    if (speed >= 200) {
       setSpeed(0);
       setLucky(data.currentEl);
     }

@@ -4,18 +4,19 @@ import axios from "axios";
 
 function Manager(props) {
   const context = useContext(ManagerContext);
-  const [values, setManager] = useState({
+  const [values, setValues] = useState({
     username: "",
     password: ""
   });
   const [message, setMessage] = useState();
 
   const handleInput = event => {
-    setManager({ ...values, [event.target.name]: event.target.value });
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   const signIn = event => {
     event.preventDefault();
+    setMessage("Đang đăng nhập, chờ xíu..");
     axios
       .post("/manager", {
         username: values.username,
@@ -43,7 +44,7 @@ function Manager(props) {
           required
         />
       </div>
-      <div className="form-group mt-5">
+      <div className="form-group">
         <input
           name="password"
           value={values.password}
@@ -71,7 +72,15 @@ function Manager(props) {
 
   const optionsInput = (
     <div className="request-form">
-      <h2>Quản lý</h2>
+      <div className="d-flex mt-2 back-button">
+        <button
+          onClick={() => props.history.goBack()}
+          className="btn btn-light"
+        >
+          <i class="fa fa-arrow-left" />
+        </button>
+        <h2 className="ml-4">Quản lý</h2>
+      </div>
       <div className="form-group mt-5">
         <button
           onClick={() => props.history.push("/root/scanner")}

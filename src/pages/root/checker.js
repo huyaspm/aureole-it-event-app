@@ -56,7 +56,15 @@ function Checker(props) {
           <div className="col-xl-3 col-lg-3 col-md-1" />
           <div className="col-xl-6 col-lg-6 col-md-10">
             <div className="request-form">
-              <h2>Quét điểm danh</h2>
+              <div className="d-flex mt-2 back-button">
+                <button
+                  onClick={() => props.history.goBack()}
+                  className="btn btn-light"
+                >
+                  <i class="fa fa-arrow-left" />
+                </button>
+                <h2 className="ml-4">Quét điểm danh</h2>
+              </div>
               <div className="form-group mt-5">
                 <QrReader
                   delay={1000}

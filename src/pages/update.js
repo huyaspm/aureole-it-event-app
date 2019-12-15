@@ -15,6 +15,7 @@ function Update(props) {
 
   const updateDetail = event => {
     event.preventDefault();
+    setValues({...values, message: 'Đang cập nhật, chờ xíu..'})
     const email = values.email + "@ait.com";
     axios
       .post("/register", {
