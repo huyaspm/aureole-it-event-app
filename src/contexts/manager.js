@@ -45,6 +45,9 @@ const ManagerProvider = props => {
   const [state, dispatch] = useReducer(managerReducer, initialState);
   const signIn = data => {
     localStorage.setItem("jwt-token", data.token);
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${data.token}`;
     dispatch({
       type: "SIGNIN",
       payload: data
