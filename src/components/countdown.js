@@ -16,9 +16,13 @@ function Countdown() {
   const [, forceUpdate] = React.useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       const date = calculate();
       if (date) setCountdown(date);
+      else {
+        setCountdown(null);
+        clearInterval(interval);
+      }
       forceUpdate(up => !up);
     }, 1000);
   }, [countdown]);
@@ -54,7 +58,7 @@ function Countdown() {
     return value;
   };
 
-  return (
+  return countdown ? (
     <div id="timer" className="d-flex mb-5">
       <div className="time pl-3">
         {format(countdown.days)}
@@ -73,6 +77,10 @@ function Countdown() {
         <span>Seconds</span>
       </div>
     </div>
+  ) : (
+    <h2 className="mt-5 mb-5">
+      <em>Trong thời gian sự kiện</em>
+    </h2>
   );
 }
 

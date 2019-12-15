@@ -1,9 +1,8 @@
 import React from "react";
 
-import Detail from "../components/detail";
-import Signup from "../components/signup";
+import Detail from "./detail";
 
-function Template() {
+function Layout({ children }) {
   return (
     <div>
       <img
@@ -15,11 +14,13 @@ function Template() {
         <div className="row slider-text align-items-center">
           <Detail />
           <div className="col-xl-2 col-lg-1 col-md-1" />
-          <Signup />
+          <div className="col-xl-4 col-lg-5 col-md-6 mt-0 mt-md-5 mb-5">
+            {children}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Template;
+export default Layout;

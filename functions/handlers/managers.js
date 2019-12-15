@@ -95,7 +95,7 @@ exports.scan = async (req, res) => {
         return res.status(400).json({ handle: "invalid ticket code" });
       } else {
         data.forEach(async doc => {
-          if (doc.data().checked.checkedIn) {
+          if (doc.data().checked.checkedIn || doc.data().gifts.taken) {
             return res.status(401).json({ handle: "already checked" });
           } else {
             var luckyNumber = randomize("0", 3);
@@ -118,6 +118,32 @@ exports.scan = async (req, res) => {
               .collection("users")
               .doc(doc.id)
               .set(user);
+            return res.json(user);
+          }
+        });
+      }
+    })
+    .catch(() =>
+      res.status(500).json({ error: "something went wrong, try again" })
+    );
+};
+
+exports.give = async (req, res) => {
+  auth(req, res);
+  firestore
+    .collection("users")
+    .where("checked.ticketCode", "==", req.body.ticketCode)
+    .get()
+    .then(data => {
+      if (data.empty) {
+        return res.status(400).json({ handle: "user not found" });
+      } else {
+        data.forEach(async doc => {
+          if (!doc.data().checked.checkedIn) return res.status(402).json({ handle: "not checked" });
+          if (doc.data().gifts.taken) {
+            return res.status(401).json({ handle: "was given" });
+          } else {
+            var user = doc.data();
             return res.json(user);
           }
         });

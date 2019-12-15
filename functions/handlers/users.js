@@ -49,8 +49,8 @@ exports.register = async (req, res) => {
         firestore
           .collection("users")
           .add(user)
-          .then(doc => {
-            res.json({ message: `document ${doc.id} was created` });
+          .then(() => {
+            res.json(user);
           });
       } else
         return res.status(400).json({ handle: "email is already registered" });
@@ -89,7 +89,7 @@ exports.user = (req, res) => {
     );
 };
 
-exports.status = (req, res) => {
+exports.checked = (req, res) => {
   firestore
     .collection("users")
     .doc(req.body.id)

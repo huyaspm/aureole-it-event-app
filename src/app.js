@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
+import { UserProvider } from "./contexts/user";
+import { ManagerProvider } from "./contexts/manager";
+
 import "./app.scss";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Splash from './components/splashscreen'
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Homepage from "./pages/homepage";
-import Register from "./pages/register";
-import Template from "./pages/template";
-import Notfound from "./pages/notfound";
-
-import { ManagerProvider } from "./utils/manager";
-import ManagerRoute from "./route/manager";
-import Scanner from "./pages/root/scanner";
 import Manager from "./pages/root/manager";
+import Checker from "./pages/root/checker";
+import Giver from "./pages/root/giver";
+import Spinner from "./pages/root/spinner";
+
+import Splash from "./components/splashscreen";
+import Homepage from "./pages/homepage";
+import Signin from "./pages/sign-in";
+import Update from "./pages/update";
 
 axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
+// axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
 
 function App() {
   const [ready, setReady] = useState(false);
@@ -28,18 +31,22 @@ function App() {
   });
 
   return ready ? (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/template" component={Template} />
-        <ManagerProvider>
-          <Route exact path="/root" component={Manager} />
-          <ManagerRoute exact path="/root/scanner" component={Scanner} />
-        </ManagerProvider>
-        <Route exact component={Notfound} />
-      </Switch>
-    </Router>
+    <UserProvider>
+      <ManagerProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route exact path="/sign-in" component={Signin} />
+            <Route exact path="/update" component={Update} />
+            <Route exact path="/root" component={Manager} />
+            <Route exact path="/root/scanner" component={Checker} />
+            <Route exact path="/root/giver" component={Giver} />
+            <Route exact path="/root/lucky-number" component={Spinner} />
+            <Route component={Homepage} />
+          </Switch>
+        </Router>
+      </ManagerProvider>
+    </UserProvider>
   ) : (
     <Splash />
   );
