@@ -30,9 +30,14 @@ const UserProvider = props => {
     setGlobal({ ...global, user: user });
   };
 
+  const signOut = () => {
+    firebase.auth().signOut()
+    setGlobal({ ...global, auth: null });
+  }
+
   return (
     <UserContext.Provider
-      value={{ auth: global.auth, user: global.user, updateUser }}
+      value={{ auth: global.auth, user: global.user, updateUser, signOut }}
       {...props}
     />
   );

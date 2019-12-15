@@ -96,6 +96,14 @@ function Manager(props) {
         >
           <strong>Quay may mắn</strong>
         </button>
+        <div className="form-group mt-4">
+          <button
+            onClick={() => context.signOut()}
+            className="btn btn-light py-3 px-4"
+          >
+            <strong>Đăng xuất</strong>
+          </button>
+        </div>
       </div>
     </div>
   );

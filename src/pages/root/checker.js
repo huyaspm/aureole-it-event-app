@@ -29,8 +29,8 @@ function Checker(props) {
         setMessage(res.data.fullName + ", " + res.data.email);
       })
       .catch(err => {
-        if (err.response.status === 401) setMessage("Đã quét mã này");
-        if (err.response.status === 400) setMessage("Không tìm thấy mã");
+        if (err && err.response.status === 401) setMessage("Đã quét mã này");
+        if (err && err.response.status === 400) setMessage("Không tìm thấy mã");
       });
   };
 
@@ -46,7 +46,6 @@ function Checker(props) {
 
   return (
     <div>
-      {!context.manager && props.history.push("/root")}
       <img
         src="/images/background.jpg"
         className="background"

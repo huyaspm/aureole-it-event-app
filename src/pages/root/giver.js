@@ -41,9 +41,9 @@ function Giver(props) {
         });
       })
       .catch(err => {
-        if (err.response.status === 400) setMessage("Không tìm thấy mã");
-        if (err.response.status === 401) setMessage("Đã trao quà cho mã này");
-        if (err.response.status === 402)
+        if (err && err.response.status === 400) setMessage("Không tìm thấy mã");
+        if (err && err.response.status === 401) setMessage("Đã trao quà cho mã này");
+        if (err && err.response.status === 402)
           setMessage("Mã này chưa quét tham gia");
       });
   };
@@ -80,7 +80,6 @@ function Giver(props) {
 
   return (
     <div>
-      {!context.manager && props.history.push("/root")}
       <img
         src="/images/background.jpg"
         className="background"

@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import { UserContext } from "../contexts/user";
 
 function Homepage(props) {
-  const { auth, user, updateUser } = useContext(UserContext);
+  const { auth, user, updateUser, signOut } = useContext(UserContext);
 
   useEffect(() => {
     if (user && !user.checked.checkedIn) {
@@ -59,6 +59,17 @@ function Homepage(props) {
           size="256"
         ></QRCode>
       </div>
+      <div className="form-group mt-4">
+        <button
+          onClick={() => {
+            signOut();
+            props.history.push("/sign-in");
+          }}
+          className="btn btn-primary py-3 px-4"
+        >
+          <strong>Đăng xuất</strong>
+        </button>
+      </div>
     </div>
   );
 
@@ -103,6 +114,17 @@ function Homepage(props) {
           size="256"
         ></QRCode>
       </div>
+      <div className="form-group mt-4">
+        <button
+          onClick={() => {
+            signOut();
+            props.history.push("/sign-in");
+          }}
+          className="btn btn-primary py-3 px-4"
+        >
+          <strong>Đăng xuất</strong>
+        </button>
+      </div>
     </div>
   );
 
@@ -138,6 +160,17 @@ function Homepage(props) {
         <label>
           <strong>Chúc bạn tham gia tiệc vui vẻ!</strong>
         </label>
+      </div>
+      <div className="form-group mt-4">
+        <button
+          onClick={() => {
+            signOut();
+            props.history.push("/sign-in");
+          }}
+          className="btn btn-primary py-3 px-4"
+        >
+          <strong>Đăng xuất</strong>
+        </button>
       </div>
     </div>
   );

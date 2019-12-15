@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import { ManagerContext } from "../utils/manager";
+import { ManagerContext } from "../contexts/manager";
 
 function ManagerRoute({ component: Component, ...rest }) {
   const { manager } = useContext(ManagerContext);

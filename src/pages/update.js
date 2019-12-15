@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/user";
 import Layout from "../components/layout";
 
 function Update(props) {
-  const { auth, user, updateUser } = useContext(UserContext);
+  const { auth, user, updateUser, signOut } = useContext(UserContext);
 
   const [values, setValues] = useState({
     message: "Nhớ nhập đúng thông tin để có quà nhé",
@@ -80,6 +80,16 @@ function Update(props) {
           value="Cập nhật"
           className="btn btn-primary py-3 px-4"
         />
+      </div>
+      <div className="form-group mt-4 text-center">
+        <label
+          onClick={() => {
+            signOut();
+            props.history.push("/sign-in");
+          }}
+        >
+          Đăng ký bằng số điện thoại khác
+        </label>
       </div>
     </form>
   );

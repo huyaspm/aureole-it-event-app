@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { UserProvider } from "./contexts/user";
 import { ManagerProvider } from "./contexts/manager";
+import ManagerRoute from './route/manager'
 
 import "./app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -39,9 +40,9 @@ function App() {
             <Route exact path="/sign-in" component={Signin} />
             <Route exact path="/update" component={Update} />
             <Route exact path="/root" component={Manager} />
-            <Route exact path="/root/scanner" component={Checker} />
-            <Route exact path="/root/giver" component={Giver} />
-            <Route exact path="/root/lucky-number" component={Spinner} />
+            <ManagerRoute exact path="/root/scanner" component={Checker} />
+            <ManagerRoute exact path="/root/giver" component={Giver} />
+            <ManagerRoute exact path="/root/lucky-number" component={Spinner} />
             <Route component={Homepage} />
           </Switch>
         </Router>
