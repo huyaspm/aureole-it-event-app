@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import QRCode from "qrcode.react";
 
@@ -7,31 +7,40 @@ import { UserContext } from "../contexts/user";
 
 function Homepage(props) {
   const { auth, user, updateUser, signOut } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user && !user.checked.checkedIn) {
-      axios
-        .post("/checked", {
-          id: user.id
-        })
-        .then(res => {
-          if (res && res.data) {
-            updateUser(res.data);
-          }
-        })
-        .catch(err => console.log(err));
-    }
-    if (user && user.checked.checkedIn && !user.gifts.taken) {
-      axios
-        .post("/taken", {
-          id: user.id
-        })
-        .then(res => {
-          if (res && res.data) {
-            updateUser(res.data);
-          }
-        })
-        .catch(err => console.log(err));
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    if (
+      new Date() >=
+      new Date("Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)")
+    ) {
+      if (user && !user.checked.checkedIn) {
+        axios
+          .post("/checked", {
+            id: user.id
+          })
+          .then(res => {
+            if (res && res.data) {
+              updateUser(res.data);
+            }
+          })
+          .catch(err => console.log(err));
+      }
+      if (user && user.checked.checkedIn && !user.gifts.taken) {
+        axios
+          .post("/taken", {
+            id: user.id
+          })
+          .then(res => {
+            if (res && res.data) {
+              updateUser(res.data);
+            }
+          })
+          .catch(err => console.log(err));
+      }
     }
   });
 
@@ -177,9 +186,25 @@ function Homepage(props) {
     </div>
   );
 
+  const loadingInput = (
+    <div className="request-form" style={{ height: "400px" }}>
+      <h2>Đang tải..</h2>
+      <div className="d-flex justify-content-center">
+        <div
+          className="spinner-grow text-secondary"
+          role="status"
+          style={{ marginTop: "30%", width: "3rem", height: "3rem" }}
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Layout>
-      {!auth && !user && props.history.push("/sign-in")}
+      {!loading && !auth && !user && props.history.push("/sign-in")}
+      {loading && !user && loadingInput}
       {auth && user && !user.checked.checkedIn && codeDetail}
       {auth &&
         user &&

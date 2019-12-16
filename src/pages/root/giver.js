@@ -4,7 +4,7 @@ import axios from "axios";
 import { ManagerContext } from "../../contexts/manager";
 
 function Giver(props) {
-  const context = useContext(ManagerContext);
+  useContext(ManagerContext);
   const [code, setCode] = useState();
   const [message, setMessage] = useState();
   const [giving, setGiving] = useState(false);
@@ -69,6 +69,7 @@ function Giver(props) {
   };
 
   const givingGifts = () => {
+    setMessage("Đang trao quà..");
     axios
       .post("/manager/gift", {
         uid: gifts.uid
@@ -115,7 +116,7 @@ function Giver(props) {
                   onClick={() => props.history.goBack()}
                   className="btn btn-light"
                 >
-                  <i class="fa fa-arrow-left" />
+                  <i className="fa fa-arrow-left" />
                 </button>
                 <h2 className="ml-4">Quét trao quà</h2>
               </div>
@@ -133,7 +134,7 @@ function Giver(props) {
               <div className="input-group mt-4">
                 <div className="input-group-append">
                   <span className="input-group-text mr-2" id="code">
-                    AIT-
+                    AIT -
                   </span>
                 </div>
                 <input

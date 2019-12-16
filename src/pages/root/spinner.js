@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextLoop from "react-text-loop";
 import randomize from "randomatic";
 
 function Spinner() {
-  const [luckies, setLuckies] = useState([]);
-  const [lucky, setLucky] = useState();
+  const [luckies, ] = useState([]);
+  const [, setLucky] = useState();
   const [mount, setMount] = useState(false);
   const [stop, setStop] = useState(false);
   const [speed, setSpeed] = useState(50);

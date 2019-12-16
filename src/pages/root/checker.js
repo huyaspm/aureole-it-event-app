@@ -4,7 +4,7 @@ import axios from "axios";
 import { ManagerContext } from "../../contexts/manager";
 
 function Checker(props) {
-  const context = useContext(ManagerContext);
+  useContext(ManagerContext);
   const [code, setCode] = useState();
   const [message, setMessage] = useState();
   const [checked, setChecked] = useState(["AIT-"]);
@@ -74,7 +74,7 @@ function Checker(props) {
                   onClick={() => props.history.goBack()}
                   className="btn btn-light"
                 >
-                  <i class="fa fa-arrow-left" />
+                  <i className="fa fa-arrow-left" />
                 </button>
                 <h2 className="ml-4">Quét điểm danh</h2>
               </div>
@@ -91,7 +91,7 @@ function Checker(props) {
               <div className="input-group mt-4">
                 <div className="input-group-append">
                   <span className="input-group-text mr-2" id="code">
-                    AIT-
+                    AIT -
                   </span>
                 </div>
                 <input

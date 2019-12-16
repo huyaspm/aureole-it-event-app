@@ -77,7 +77,7 @@ function Manager(props) {
           onClick={() => props.history.goBack()}
           className="btn btn-light"
         >
-          <i class="fa fa-arrow-left" />
+          <i className="fa fa-arrow-left" />
         </button>
         <h2 className="ml-4">Quản lý</h2>
       </div>

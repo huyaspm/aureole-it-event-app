@@ -6,27 +6,27 @@ const UserContext = createContext({});
 
 const UserProvider = props => {
   const [global, setGlobal] = useState({});
-  const [mount, setMount] = useState();
+
+  const fetch = async () => {
+    await firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        setGlobal({ ...global, auth: user.toJSON() });
+        axios
+          .post("/user", {
+            uid: user.toJSON().uid
+          })
+          .then(res => {
+            if (res.data)
+              setGlobal({ ...global, auth: user.toJSON(), user: res.data });
+          })
+          .catch(err => console.log(err));
+      }
+    });
+  };
 
   useEffect(() => {
-    if (!mount) {
-      firebase.auth().onAuthStateChanged(async user => {
-        if (user) {
-          setGlobal({ ...global, auth: user.toJSON() });
-          await axios
-            .post("/user", {
-              uid: user.toJSON().uid
-            })
-            .then(res => {
-              if (res.data) setGlobal({ ...global, auth: user.toJSON(), user: res.data });
-            })
-            .catch(err => console.log(err));
-          
-        }
-      });
-    }
-    setMount(true);
-  }, [global, mount]);
+    fetch();
+  }, []);
 
   const updateUser = user => {
     setGlobal({ ...global, user: user });
@@ -39,7 +39,12 @@ const UserProvider = props => {
 
   return (
     <UserContext.Provider
-      value={{ auth: global.auth, user: global.user, updateUser, signOut }}
+      value={{
+        auth: global.auth,
+        user: global.user,
+        updateUser,
+        signOut
+      }}
       {...props}
     />
   );

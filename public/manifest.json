@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Aureole IT Inc.",
+    "short_name": "Aureole IT",
     "icons": [
         {
             "src": "/icons/aureole-logo.192.png",
@@ -13,6 +13,7 @@
             "type": "image/png"
         }
     ],
+    "start_url": ".",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone"
