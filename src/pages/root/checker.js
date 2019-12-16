@@ -7,35 +7,48 @@ function Checker(props) {
   const context = useContext(ManagerContext);
   const [code, setCode] = useState();
   const [message, setMessage] = useState();
+  const [checked, setChecked] = useState(["AIT-"]);
 
   useEffect(() => {
     if (code) {
-      if (Object.values(code).length === 10) {
-        checkCode(code);
+      if (Object.values(code).length === 5) {
+        checkCode("AIT-" + code);
         setCode("");
-      } else if (Object.values(code).length > 10) {
+      } else if (Object.values(code).length > 5) {
         setCode("");
         setMessage("Mã tham dự không đúng");
       }
     }
   }, [code]);
 
+  const codeExist = code => {
+    var result = false;
+    checked.forEach(check => {
+      if (code === check) result = true;
+    });
+    return result;
+  };
+
   const checkCode = code => {
-    axios
-      .post("/manager/scan", {
-        ticketCode: code
-      })
-      .then(res => {
-        setMessage(res.data.fullName + ", " + res.data.email);
-      })
-      .catch(err => {
-        if (err && err.response.status === 401) setMessage("Đã quét mã này");
-        if (err && err.response.status === 400) setMessage("Không tìm thấy mã");
-      });
+    if (!codeExist(code)) {
+      setChecked([...checked, code]);
+      axios
+        .post("/manager/scan", {
+          ticketCode: code
+        })
+        .then(res => {
+          setMessage(res.data.fullName + ", " + res.data.email);
+        })
+        .catch(err => {
+          if (err && err.response.status === 401) setMessage("Đã quét mã này");
+          if (err && err.response.status === 400)
+            setMessage("Không tìm thấy mã");
+        });
+    } else setMessage("Đã quét mã này");
   };
 
   const handleScan = data => {
-    if (data) setCode(data);
+    if (data) setCode(data.split("-")[1]);
   };
 
   const handleInput = event => setCode(event.target.value);
@@ -75,18 +88,24 @@ function Checker(props) {
                   showViewFinder={false}
                 />
               </div>
-              <div className="form-group mt-4">
-                <p>
-                  <input
-                    name="code"
-                    className="form-control"
-                    value={code}
-                    onChange={handleInput}
-                    placeholder="Mã tham dự *"
-                  />
-                </p>
+              <div className="input-group mt-4">
+                <div className="input-group-append">
+                  <span className="input-group-text mr-2" id="code">
+                    AIT-
+                  </span>
+                </div>
+                <input
+                  name="code"
+                  type="text"
+                  className="form-control"
+                  placeholder="Mã tham dự *"
+                  required
+                  aria-describedby="code"
+                  onChange={handleInput}
+                  value={code}
+                />
               </div>
-              <div className="form-group text-right">
+              <div className="form-group text-right mt-4">
                 <label className="mr-2">
                   <strong>{message}</strong>
                 </label>

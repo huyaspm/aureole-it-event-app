@@ -25,7 +25,7 @@ function Manager(props) {
       .then(res => {
         if (res && res.data) {
           context.signIn(res.data);
-        } else setMessage("user not found");
+        } else setMessage("Tài khoản không tồn tại");
       })
       .catch(() => setMessage("Đăng nhập lỗi"));
   };

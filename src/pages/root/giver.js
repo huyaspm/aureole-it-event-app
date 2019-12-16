@@ -8,6 +8,7 @@ function Giver(props) {
   const [code, setCode] = useState();
   const [message, setMessage] = useState();
   const [giving, setGiving] = useState(false);
+  const [checked, setChecked] = useState(["AIT-"]);
   const [gifts, setGifts] = useState({
     uid: "",
     gift: "",
@@ -16,37 +17,55 @@ function Giver(props) {
 
   useEffect(() => {
     if (code && !giving) {
-      if (Object.values(code).length === 10) {
-        checkCode(code);
-        setGiving(true);
-      } else if (Object.values(code).length > 10) {
+      if (Object.values(code).length === 5) {
+        checkCode("AIT-" + code);
+      } else if (Object.values(code).length > 5) {
         setCode("");
         setMessage("Mã tham dự không đúng");
       }
     }
   }, [code]);
 
+  const codeExist = code => {
+    var result = false;
+    checked.forEach(check => {
+      if (code === check) result = true;
+    });
+    return result;
+  };
+
   const checkCode = code => {
-    axios
-      .post("/manager/give", {
-        ticketCode: code
-      })
-      .then(res => {
-        setMessage(res.data.fullName + ", " + res.data.email);
-        setGifts({
-          ...gifts,
-          uid: res.data.uid,
-          gift: res.data.gifts.gift,
-          luckyMoney: res.data.gifts.luckyMoney
+    setGiving(true);
+    if (!codeExist(code)) {
+      setChecked([...checked, code]);
+      axios
+        .post("/manager/give", {
+          ticketCode: code
+        })
+        .then(res => {
+          setMessage(res.data.fullName + ", " + res.data.email);
+          setGifts({
+            ...gifts,
+            uid: res.data.uid,
+            gift: res.data.gifts.gift,
+            luckyMoney: res.data.gifts.luckyMoney
+          });
+        })
+        .catch(err => {
+          if (err && err.response.status === 400)
+            setMessage("Không tìm thấy mã");
+          if (err && err.response.status === 401)
+            setMessage("Đã trao quà cho mã này");
+          if (err && err.response.status === 402)
+            setMessage("Mã này chưa quét tham gia");
+          setGiving(false);
+          setCode("");
         });
-      })
-      .catch(err => {
-        if (err && err.response.status === 400) setMessage("Không tìm thấy mã");
-        if (err && err.response.status === 401)
-          setMessage("Đã trao quà cho mã này");
-        if (err && err.response.status === 402)
-          setMessage("Mã này chưa quét tham gia");
-      });
+    } else {
+      setMessage("Đã quét mã này");
+      setGiving(false);
+      setCode("");
+    }
   };
 
   const givingGifts = () => {
@@ -56,8 +75,6 @@ function Giver(props) {
       })
       .then(() => {
         setMessage("Trao quà thành công");
-        setGiving(false);
-        setCode("");
         setGifts({
           uid: "",
           gift: "",
@@ -67,10 +84,12 @@ function Giver(props) {
       .catch(() => {
         setMessage("Có lỗi xảy ra, xin thử lại");
       });
+    setGiving(false);
+    setCode("");
   };
 
   const handleScan = data => {
-    if (data && !giving) setCode(data);
+    if (data && !giving) setCode(data.split("-")[1]);
   };
 
   const handleInput = event => setCode(event.target.value);
@@ -111,19 +130,25 @@ function Giver(props) {
                   readOnly={giving}
                 />
               </div>
-              <div className="form-group mt-4">
-                <p>
-                  <input
-                    name="code"
-                    className="form-control"
-                    value={code}
-                    onChange={handleInput}
-                    placeholder="Mã trao quà *"
-                    readOnly={giving}
-                  />
-                </p>
+              <div className="input-group mt-4">
+                <div className="input-group-append">
+                  <span className="input-group-text mr-2" id="code">
+                    AIT-
+                  </span>
+                </div>
+                <input
+                  name="code"
+                  type="number"
+                  className="form-control"
+                  placeholder="Mã tham dự *"
+                  required
+                  readOnly={giving}
+                  aria-describedby="code"
+                  onChange={handleInput}
+                  value={code}
+                />
               </div>
-              <div className="form-group text-right">
+              <div className="form-group text-right mt-4">
                 <label className="mr-2">
                   <strong>{message}</strong>
                 </label>

@@ -3,7 +3,7 @@ const { validateRegister } = require("../utils/validate");
 const randomize = require("randomatic");
 
 exports.register = async (req, res) => {
-  var ticketCode = randomize("Aa0", 10);
+  var ticketCode = "AIT-" + randomize("0", 5);
   var similar = false;
   while (!similar) {
     await firestore
@@ -12,8 +12,11 @@ exports.register = async (req, res) => {
       .get()
       .then(data => {
         if (data.empty) similar = true;
-        else ticketCode = randomize("Aa0", 10);
-      });
+      })
+      .catch(() =>
+        res.status(500).json({ error: "something went wrong, try again" })
+      );
+    if (!similar) ticketCode = "AIT-" + randomize("0", 5);
   }
   const user = {
     uid: req.body.uid,
@@ -49,11 +52,15 @@ exports.register = async (req, res) => {
         firestore
           .collection("users")
           .add(user)
-          .then(() => {
+          .then(doc => {
+            user.id = doc.id;
             res.json(user);
-          });
+          })
+          .catch(() =>
+            res.status(500).json({ error: "something went wrong, try again" })
+          );
       } else
-        return res.status(400).json({ handle: "email is already registered" });
+        return res.status(401).json({ handle: "email is already registered" });
     })
     .catch(() =>
       res.status(500).json({ error: "something went wrong, try again" })
@@ -113,7 +120,7 @@ exports.checked = (req, res) => {
           return res.status(400).json({ handle: "user not found" });
         }
       },
-      () => {
+      err => {
         return res
           .status(500)
           .json({ error: "something went wrong, try again" });

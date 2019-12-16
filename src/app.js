@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { UserProvider } from "./contexts/user";
 import { ManagerProvider } from "./contexts/manager";
-import ManagerRoute from './route/manager'
+import ManagerRoute from "./route/manager";
 
 import "./app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";

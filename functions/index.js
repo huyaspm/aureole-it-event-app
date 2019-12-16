@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: true }));
 
 const { register, user, checked, taken } = require("./handlers/users");
 const { manager, create, scan, give, gift, lucky } = require("./handlers/managers");

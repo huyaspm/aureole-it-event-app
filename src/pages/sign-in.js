@@ -36,6 +36,7 @@ function Signin(props) {
 
   const confirmCode = event => {
     event.preventDefault();
+    setValues({ ...values, message: "Đang xác thực.." })
     if (values.confirmCode.length && values.confirmResult) {
       values.confirmResult
         .confirm(values.confirmCode)

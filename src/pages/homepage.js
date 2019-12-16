@@ -18,7 +18,8 @@ function Homepage(props) {
           if (res && res.data) {
             updateUser(res.data);
           }
-        });
+        })
+        .catch(err => console.log(err));
     }
     if (user && user.checked.checkedIn && !user.gifts.taken) {
       axios
@@ -29,7 +30,8 @@ function Homepage(props) {
           if (res && res.data) {
             updateUser(res.data);
           }
-        });
+        })
+        .catch(err => console.log(err));
     }
   });
 

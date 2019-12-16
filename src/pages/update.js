@@ -15,7 +15,7 @@ function Update(props) {
 
   const updateDetail = event => {
     event.preventDefault();
-    setValues({...values, message: 'Đang cập nhật, chờ xíu..'})
+    setValues({ ...values, message: "Đang cập nhật, chờ xíu.." });
     const email = values.email + "@ait.com";
     axios
       .post("/register", {
@@ -26,11 +26,13 @@ function Update(props) {
       })
       .then(res => {
         updateUser(res.data);
-        props.history.push("/");
       })
-      .catch(() =>
-        setValues({ ...values, message: "Hãy nhập đúng thông tin" })
-      );
+      .catch(err => {
+        if (err && err.response.status === 401)
+          return setValues({ ...values, message: "Email đã đăng ký" });
+        else
+          return setValues({ ...values, message: "Hãy nhập đúng thông tin" });
+      });
   };
 
   const handleInput = event => {

@@ -10,16 +10,18 @@ const UserProvider = props => {
 
   useEffect(() => {
     if (!mount) {
-      firebase.auth().onAuthStateChanged(user => {
+      firebase.auth().onAuthStateChanged(async user => {
         if (user) {
           setGlobal({ ...global, auth: user.toJSON() });
-          axios
+          await axios
             .post("/user", {
               uid: user.toJSON().uid
             })
             .then(res => {
-              if (res.data) setGlobal({ auth: user.toJSON(), user: res.data });
-            });
+              if (res.data) setGlobal({ ...global, auth: user.toJSON(), user: res.data });
+            })
+            .catch(err => console.log(err));
+          
         }
       });
     }
@@ -31,9 +33,9 @@ const UserProvider = props => {
   };
 
   const signOut = () => {
-    firebase.auth().signOut()
+    firebase.auth().signOut();
     setGlobal({ ...global, auth: null });
-  }
+  };
 
   return (
     <UserContext.Provider

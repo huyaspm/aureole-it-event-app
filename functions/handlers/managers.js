@@ -109,8 +109,13 @@ exports.scan = async (req, res) => {
                 .get()
                 .then(data => {
                   if (data.empty) similar = true;
-                  else luckyNumber = randomize("0", 3);
-                });
+                })
+                .catch(() =>
+                  res
+                    .status(500)
+                    .json({ error: "something went wrong, try again" })
+                );
+                if (!similar) luckyNumber = randomize("0", 3);
             }
             var user = doc.data();
             user.checked.checkedIn = true;

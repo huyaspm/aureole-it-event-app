@@ -1,5 +1,4 @@
 import React from "react";
-
 import Detail from "./detail";
 
 function Layout({ children }) {
