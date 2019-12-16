@@ -39,7 +39,7 @@ function Signin(props) {
     if (values.confirmCode.length && values.confirmResult) {
       values.confirmResult
         .confirm(values.confirmCode)
-        .then(props.history.push("/"))
+        .then(() => setValues({ ...values, message: "Xác thực thành công" }))
         .catch(() => setValues({ ...values, message: "Sai mã xác thực" }));
     }
   };
