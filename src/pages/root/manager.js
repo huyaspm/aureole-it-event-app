@@ -83,39 +83,69 @@ function Manager(props) {
       </div>
       <div className="form-group mt-5">
         <button
-          onClick={() => props.history.push("/root/scanner")}
+          onClick={() => props.history.push("/root/pairing")}
           className="btn btn-light py-3 px-4"
         >
-          <strong>Quét điểm danh</strong>
+          <strong>Quay trao quà</strong>
         </button>
       </div>
       <div className="form-group mt-4">
         <button
-          onClick={() => props.history.push("/root/giver")}
+          onClick={() => context.signOut()}
           className="btn btn-light py-3 px-4"
         >
-          <strong>Quét trao quà</strong>
+          <strong>Đăng xuất</strong>
         </button>
-      </div>
-      <div className="form-group mt-4">
-        <button
-          onClick={() => props.history.push("/root/lucky-number")}
-          className="btn btn-light py-3 px-4"
-          disabled={context.manager && context.manager.permission.type !== 0}
-        >
-          <strong>Quay may mắn</strong>
-        </button>
-        <div className="form-group mt-4">
-          <button
-            onClick={() => context.signOut()}
-            className="btn btn-light py-3 px-4"
-          >
-            <strong>Đăng xuất</strong>
-          </button>
-        </div>
       </div>
     </div>
   );
+
+  // const optionsInput = (
+  //   <div className="request-form">
+  //     <div className="d-flex mt-2 back-button">
+  //       <button
+  //         onClick={() => props.history.goBack()}
+  //         className="btn btn-light"
+  //       >
+  //         <i className="fa fa-arrow-left" />
+  //       </button>
+  //       <h2 className="ml-4">Quản lý</h2>
+  //     </div>
+  //     <div className="form-group mt-5">
+  //       <button
+  //         onClick={() => props.history.push("/root/scanner")}
+  //         className="btn btn-light py-3 px-4"
+  //       >
+  //         <strong>Quét điểm danh</strong>
+  //       </button>
+  //     </div>
+  //     <div className="form-group mt-4">
+  //       <button
+  //         onClick={() => props.history.push("/root/giver")}
+  //         className="btn btn-light py-3 px-4"
+  //       >
+  //         <strong>Quét trao quà</strong>
+  //       </button>
+  //     </div>
+  //     <div className="form-group mt-4">
+  //       <button
+  //         onClick={() => props.history.push("/root/lucky-number")}
+  //         className="btn btn-light py-3 px-4"
+  //         disabled={context.manager && context.manager.permission.type !== 0}
+  //       >
+  //         <strong>Quay may mắn</strong>
+  //       </button>
+  //       <div className="form-group mt-4">
+  //         <button
+  //           onClick={() => context.signOut()}
+  //           className="btn btn-light py-3 px-4"
+  //         >
+  //           <strong>Đăng xuất</strong>
+  //         </button>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div>

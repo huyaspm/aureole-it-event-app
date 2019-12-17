@@ -9,9 +9,9 @@ module.exports = (req, res) => {
         const user = jwt.verify(token, "gau-gau, ang-ang");
         return user;
       } catch (err) {
-        throw new Error('invalid token')
+        throw new Error("invalid token");
       }
     }
   }
-  throw new Error('token must be provided')
+  throw new Error("token must be provided");
 };

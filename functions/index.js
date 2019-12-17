@@ -6,7 +6,23 @@ const app = express();
 app.use(cors({ origin: true }));
 
 const { register, user, checked, taken } = require("./handlers/users");
-const { manager, create, scan, give, gift, lucky } = require("./handlers/managers");
+
+const {
+  manager,
+  create,
+  scan,
+  give,
+  gift,
+  lucky
+} = require("./handlers/managers");
+
+const {
+  getGifts,
+  getGift,
+  createGift,
+  updateGift,
+  getGiftByName
+} = require("./handlers/gifts");
 
 app.post("/register", register);
 app.post("/user", user);
@@ -19,5 +35,11 @@ app.post("/manager/scan", scan);
 app.post("/manager/give", give);
 app.post("/manager/gift", gift);
 app.post("/manager/lucky", lucky);
+
+app.post("/gifts/", getGifts);
+app.post("/gift/", getGift);
+app.post("/gift/create", createGift);
+app.post("/gift/update", updateGift);
+app.post("/gift/name", getGiftByName);
 
 exports.api = functions.region("asia-east2").https.onRequest(app);

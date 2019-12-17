@@ -9,8 +9,8 @@ const initialState = {
   millisecond: 0
 };
 
-function Countdown() {
-  const eventTime = "Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)";
+function Countdown({ eventTime }) {
+  // const eventTime = "Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)";
 
   const [countdown, setCountdown] = useState(initialState);
   const [, forceUpdate] = React.useState(0);
