@@ -7,7 +7,7 @@ import Layout from "./layout";
 function Signin(props) {
   const { auth, user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
-  const recaptchaWrapperRef = useRef()
+  const recaptchaWrapperRef = useRef();
 
   const [values, setValues] = useState({
     message: "Xác thực để lấy mã tham dự",
@@ -39,7 +39,8 @@ function Signin(props) {
       )
       .catch(err => {
         appVerifier.clear();
-        recaptchaWrapperRef.current.innerHTML = '<div id="recaptcha-container" />'
+        recaptchaWrapperRef.current.innerHTML =
+          '<div id="recaptcha-container" />';
         setValues({ ...values, message: "Hãy nhập đúng số điện thoại" });
       });
   };
@@ -61,7 +62,15 @@ function Signin(props) {
 
   const phoneInput = (
     <form onSubmit={signIn} className="request-form">
-      <h2>Đăng ký ngay</h2>
+      <div className="d-flex mt-2 back-button">
+        <button
+          onClick={() => props.history.goBack()}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </button>
+        <h2 className="ml-4">Đăng ký ngay</h2>
+      </div>
       <div className="form-group mt-5">
         <div className="input-group">
           <div className="input-group-append">
@@ -99,7 +108,15 @@ function Signin(props) {
 
   const verifyInput = (
     <form onSubmit={confirmCode} className="request-form">
-      <h2>Xác thực</h2>
+      <div className="d-flex mt-2 back-button">
+        <button
+          onClick={() => props.history.goBack()}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </button>
+        <h2 className="ml-4">Xác thực</h2>
+      </div>
       <div className="form-group mt-5">
         <input
           name="confirmCode"

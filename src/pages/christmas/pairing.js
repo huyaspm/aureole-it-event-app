@@ -26,6 +26,7 @@ function similar(array, string) {
 
 function Pairing() {
   useContext(ManagerContext);
+  const [gifts, setGifts] = useState([]);
 
   const [mount, setMount] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -69,7 +70,8 @@ function Pairing() {
     start: false,
     stop: false,
     finish: true,
-    update: false
+    update: false,
+    active: true
   });
 
   const [speed2, setSpeed2] = useState({
@@ -89,7 +91,8 @@ function Pairing() {
     start: false,
     stop: false,
     finish: true,
-    update: false
+    update: false,
+    active: true
   });
 
   const [speed3, setSpeed3] = useState({
@@ -109,7 +112,8 @@ function Pairing() {
     start: false,
     stop: false,
     finish: true,
-    update: false
+    update: false,
+    active: true
   });
 
   const [speed4, setSpeed4] = useState({
@@ -129,7 +133,8 @@ function Pairing() {
     start: false,
     stop: false,
     finish: true,
-    update: false
+    update: false,
+    active: true
   });
 
   const [speed5, setSpeed5] = useState({
@@ -141,6 +146,7 @@ function Pairing() {
     if (!mount) {
       axios.post("/gifts").then(res => {
         res.data.forEach(gift => {
+          setGifts(res.data);
           if (gift.exchange.givenTo.uid === "") giver.push(gift.fullName);
           if (gift.exchange.takenFrom.uid === "") taker.push(gift.fullName);
         });
@@ -166,16 +172,10 @@ function Pairing() {
         return;
       } else {
         setSpeed({ ...speed, giver: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            setGivenMessage(res.data.description);
-            giverPast.push(data.currentEl);
-            setGiven(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        setGivenMessage(gift[0].description);
+        giverPast.push(data.currentEl);
+        setGiven(gift[0]);
       }
     }
   };
@@ -188,17 +188,11 @@ function Pairing() {
         return;
       } else {
         setSpeed({ ...speed, taker: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            setControl({ ...control, start: false, finish: true });
-            takerPast.push(data.currentEl);
-            setTakenMessage(res.data.description);
-            setTaken(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        setControl({ ...control, start: false, finish: true });
+        takerPast.push(data.currentEl);
+        setTakenMessage(gift[0].description);
+        setTaken(gift[0]);
       }
     }
   };
@@ -240,16 +234,12 @@ function Pairing() {
         return;
       } else {
         setSpeed2({ ...speed2, giver: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            giverPast.push(data.currentEl);
-            setGivenMessage2(res.data.description);
-            setGiven2(res.data);
-          })
-          .catch(err => console.log(err));
+
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+
+        giverPast.push(data.currentEl);
+        setGivenMessage2(gift[0].description);
+        setGiven2(gift[0]);
       }
     }
   };
@@ -262,17 +252,11 @@ function Pairing() {
         return;
       } else {
         setSpeed2({ ...speed2, taker: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            takerPast.push(data.currentEl);
-            setControl2({ ...control2, start: false, finish: true });
-            setTakenMessage2(res.data.description);
-            setTaken2(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        takerPast.push(data.currentEl);
+        setControl2({ ...control2, start: false, finish: true });
+        setTakenMessage2(gift[0].description);
+        setTaken2(gift[0]);
       }
     }
   };
@@ -314,16 +298,10 @@ function Pairing() {
         return;
       } else {
         setSpeed3({ ...speed3, giver: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            giverPast.push(data.currentEl);
-            setGivenMessage3(res.data.description);
-            setGiven3(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        giverPast.push(data.currentEl);
+        setGivenMessage3(gift[0].description);
+        setGiven3(gift[0]);
       }
     }
   };
@@ -336,17 +314,11 @@ function Pairing() {
         return;
       } else {
         setSpeed3({ ...speed3, taker: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            takerPast.push(data.currentEl);
-            setControl3({ ...control3, start: false, finish: true });
-            setTakenMessage3(res.data.description);
-            setTaken3(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        takerPast.push(data.currentEl);
+        setControl3({ ...control3, start: false, finish: true });
+        setTakenMessage3(gift[0].description);
+        setTaken3(gift[0]);
       }
     }
   };
@@ -388,16 +360,10 @@ function Pairing() {
         return;
       } else {
         setSpeed4({ ...speed4, giver: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            giverPast.push(data.currentEl);
-            setGivenMessage4(res.data.description);
-            setGiven4(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        giverPast.push(data.currentEl);
+        setGivenMessage4(gift[0].description);
+        setGiven4(gift[0]);
       }
     }
   };
@@ -410,17 +376,11 @@ function Pairing() {
         return;
       } else {
         setSpeed4({ ...speed4, taker: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            takerPast.push(data.currentEl);
-            setControl4({ ...control4, start: false, finish: true });
-            setTakenMessage4(res.data.description);
-            setTaken4(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        takerPast.push(data.currentEl);
+        setControl4({ ...control4, start: false, finish: true });
+        setTakenMessage4(gift[0].description);
+        setTaken4(gift[0]);
       }
     }
   };
@@ -461,16 +421,10 @@ function Pairing() {
         return;
       } else {
         setSpeed5({ ...speed5, giver: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            giverPast.push(data.currentEl);
-            setGivenMessage5(res.data.description);
-            setGiven5(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        giverPast.push(data.currentEl);
+        setGivenMessage5(gift[0].description);
+        setGiven5(gift[0]);
       }
     }
   };
@@ -483,17 +437,11 @@ function Pairing() {
         return;
       } else {
         setSpeed5({ ...speed5, taker: 0 });
-        axios
-          .post("/gift/name", {
-            fullName: data.currentEl
-          })
-          .then(res => {
-            takerPast.push(data.currentEl);
-            setControl5({ ...control5, start: false, finish: true });
-            setTakenMessage5(res.data.description);
-            setTaken5(res.data);
-          })
-          .catch(err => console.log(err));
+        const gift = gifts.filter(gift => gift.fullName === data.currentEl);
+        takerPast.push(data.currentEl);
+        setControl5({ ...control5, start: false, finish: true });
+        setTakenMessage5(gift[0].description);
+        setTaken5(gift[0]);
       }
     }
   };
@@ -555,28 +503,32 @@ function Pairing() {
       start: true,
       stop: false,
       finish: false,
-      success: false
+      success: false,
+      active: first ? giver.length > 2 : giver.length > 1
     });
     setControl3({
       ...control3,
       start: true,
       stop: false,
       finish: false,
-      success: false
+      success: false,
+      active: first ? giver.length > 3 : giver.length > 2
     });
     setControl4({
       ...control4,
       start: true,
       stop: false,
       finish: false,
-      success: false
+      success: false,
+      active: first ? giver.length > 4 : giver.length > 3
     });
     setControl5({
       ...control5,
       start: true,
       stop: false,
       finish: false,
-      success: false
+      success: false,
+      active: first ? giver.length > 5 : giver.length > 4
     });
   };
 
@@ -845,7 +797,7 @@ function Pairing() {
 
   const textLoop4 = (
     <div className="form-group">
-      {giver.length > 1 && taker.length > 1 && (
+      {giver.length > 3 && taker.length > 3 && (
         <div className="row text-input">
           {giverLoop4}
           {!first && (
@@ -914,7 +866,7 @@ function Pairing() {
 
   const textLoop5 = (
     <div className="form-group">
-      {giver.length > 1 && taker.length > 1 && (
+      {giver.length > 4 && taker.length > 4 && (
         <div className="row text-input">
           {giverLoop5}
           {!first && (
@@ -947,33 +899,22 @@ function Pairing() {
 
   const spinnerInput = (
     <div className="request-form">
-      <div className="form-group">
-        <div className="row">
-          <div className="col">
-            <p className="d-inline ml-3">
-              <em>Số người chưa tặng: </em>
-            </p>
-            <h2 className="d-inline ml-3 mr-3">
-              {first ? giver.length - 1 : giver.length}
-            </h2>
-          </div>
-          <div className="col mr-3 text-right">
-            <p className="d-inline">
-              <em>Số người chưa nhận: </em>
-            </p>
-            <h2 className="d-inline ml-3 mr-3">
-              {first ? taker.length - 1 : taker.length}
-            </h2>
-          </div>
-        </div>
+      <div className="form-group text-right">
+        <p className="d-inline ml-3">
+          <em>Phần quà còn lại: </em>
+        </p>
+        <h2 className="d-inline ml-3 mr-3">
+          {first ? giver.length - 1 : giver.length}
+        </h2>
       </div>
-      {textLoop}
-      {giver.length >= 2 && textLoop2}
-      {giver.length >= 3 && textLoop3}
-      {giver.length >= 4 && textLoop4}
-      {giver.length >= 5 && textLoop5}
 
-      {giver.length === 1 && (
+      {textLoop}
+      {control2.active && textLoop2}
+      {control3.active && textLoop3}
+      {control4.active && textLoop4}
+      {control5.active && textLoop5}
+
+      {!first && giver.length === 1 && (
         <div className="form-group">
           <div className="row text-input">
             <div className="col-5 mt-5 mb-lg-3">
@@ -1013,12 +954,12 @@ function Pairing() {
       )}
 
       <div className="form-group spinner">
-        {!control.start && control5.finish && (
+        {!control.start && control.finish && (
           <button onClick={startSpinner} className="btn btn-danger py-3 px-4">
             <strong>Quay may mắn</strong>
           </button>
         )}
-        {control5.start && (
+        {control.start && (
           <button
             onClick={() => {
               setControl({ ...control, stop: true });

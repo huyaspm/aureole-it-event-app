@@ -48,7 +48,7 @@ exports.updateGift = async (req, res) => {
       .collection("gifts")
       .doc(req.body.id)
       .update(gift)
-      .then(doc => {
+      .then(() => {
         firestore
           .collection("gifts")
           .doc(req.body.id)
@@ -57,7 +57,10 @@ exports.updateGift = async (req, res) => {
             const gift = doc.data();
             gift.id = doc.id;
             res.json(gift);
-          });
+          })
+          .catch(() =>
+            res.status(500).json({ error: "something went wrong, try again" })
+          );
       })
       .catch(() =>
         res.status(500).json({ error: "something went wrong, try again" })
@@ -77,29 +80,7 @@ exports.getGift = (req, res) => {
             const gift = doc.data();
             gift.id = doc.id;
             return res.json(gift);
-          }
-        });
-      }
-    })
-    .catch(() =>
-      res.status(500).json({ error: "something went wrong, try again" })
-    );
-};
-
-exports.getGiftByName = (req, res) => {
-  auth(req, res);
-  firestore
-    .collection("gifts")
-    .get()
-    .then(data => {
-      if (data.empty) res.status(400).json({ error: "gift is empty" });
-      else {
-        data.forEach(doc => {
-          if (doc.data().fullName === req.body.fullName) {
-            const gift = doc.data();
-            gift.id = doc.id;
-            return res.json(gift);
-          }
+          } else return res.status(400).json({ error: "unregister" });
         });
       }
     })

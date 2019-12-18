@@ -88,7 +88,15 @@ function Gift(props) {
 
   const detailInput = (
     <form onSubmit={createDetail} className="request-form">
-      <h2>Đăng ký trao quà</h2>
+      <div className="d-flex mt-2 back-button">
+        <button
+          onClick={() => props.history.goBack()}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </button>
+        <h2 className="ml-4">Đăng ký trao quà</h2>
+      </div>
       <div className="form-group mt-5">
         <input
           name="fullName"
@@ -108,7 +116,7 @@ function Gift(props) {
           value={values.description}
           type="text"
           className="form-control"
-          placeholder="Giới thiệu đôi nét về món quà"
+          placeholder="Lời chúc của bạn"
           aria-label="description"
         />
       </div>
