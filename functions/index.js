@@ -21,7 +21,9 @@ const {
   getGift,
   createGift,
   updateGift,
-  getGiftByName
+  getGiftByName,
+  updateGiven,
+  updateTaken
 } = require("./handlers/gifts");
 
 app.post("/register", register);
@@ -41,5 +43,7 @@ app.post("/gift/", getGift);
 app.post("/gift/create", createGift);
 app.post("/gift/update", updateGift);
 app.post("/gift/name", getGiftByName);
+app.post("/gift/update/given", updateGiven);
+app.post("/gift/update/taken", updateTaken);
 
 exports.api = functions.region("asia-east2").https.onRequest(app);

@@ -6,11 +6,13 @@ const UserContext = createContext({});
 
 const UserProvider = props => {
   const [global, setGlobal] = useState({});
+  const [syncing, setSyncing] = useState(true)
 
   const fetch = async () => {
     await firebase.auth().onAuthStateChanged(user => {
       if (user) {
         setGlobal({ ...global, auth: user.toJSON() });
+
         // axios
         //   .post("/user", {
         //     uid: user.toJSON().uid
@@ -32,6 +34,7 @@ const UserProvider = props => {
           .catch(err => console.log(err));
       }
     });
+    setSyncing(false)
   };
 
   useEffect(() => {
@@ -53,7 +56,8 @@ const UserProvider = props => {
         auth: global.auth,
         user: global.user,
         updateUser,
-        signOut
+        signOut,
+        syncing
       }}
       {...props}
     />

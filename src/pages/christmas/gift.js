@@ -4,8 +4,8 @@ import axios from "axios";
 import { UserContext } from "../../contexts/user";
 import Layout from "./layout";
 
-export default function Gift(props) {
-  const { auth, user, updateUser, signOut } = useContext(UserContext);
+function Gift(props) {
+  const { auth, user, updateUser, signOut, syncing } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [mount, setMount] = useState(false);
   const [update, setUpdate] = useState(false);
@@ -13,17 +13,21 @@ export default function Gift(props) {
 
   useEffect(() => {
     setTimeout(() => {
-      if (!mount) {
-        if (user)
-          setValues({
-            ...values,
-            fullName: user.fullName,
-            description: user.description
-          });
-      }
-      setMount(true);
       setLoading(false);
     }, 3000);
+  });
+
+  useEffect(() => {
+    if (!syncing && user) {
+      if (!mount) {
+        setValues({
+          ...values,
+          fullName: user.fullName,
+          description: user.description
+        });
+      }
+      setMount(true);
+    }
   });
 
   const [values, setValues] = useState({
@@ -117,18 +121,19 @@ export default function Gift(props) {
         <input
           type="submit"
           value="Đăng ký"
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-danger py-3 px-4"
         />
       </div>
-      <div className="form-group mt-4 text-center">
-        <label
+      <div className="form-group mt-4">
+        <button
+          className="btn btn-light py-3 px-4"
           onClick={() => {
             signOut();
             props.history.push("/sign-in");
           }}
         >
-          Đăng ký bằng số điện thoại khác
-        </label>
+          Đăng xuất
+        </button>
       </div>
     </form>
   );
@@ -169,7 +174,7 @@ export default function Gift(props) {
       </div>
       {user && update && (
         <div className="form-group">
-          <button onClick={updateDetail} className="btn btn-primary py-3 px-4">
+          <button onClick={updateDetail} className="btn btn-danger py-3 px-4">
             Cập nhật
           </button>
         </div>
@@ -188,15 +193,16 @@ export default function Gift(props) {
           </button>
         </div>
       )}
-      <div className="form-group mt-4 text-center">
-        <label
+      <div className="form-group mt-4">
+        <button
+          className="btn btn-light py-3 px-4"
           onClick={() => {
             signOut();
             props.history.push("/sign-in");
           }}
         >
-          Đăng ký bằng số điện thoại khác
-        </label>
+          Đăng xuất
+        </button>
       </div>
     </div>
   );
@@ -224,3 +230,5 @@ export default function Gift(props) {
     </Layout>
   );
 }
+
+export default Gift;

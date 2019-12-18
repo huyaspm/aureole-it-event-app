@@ -16,12 +16,12 @@ function Template(props) {
       <div className="hero-wrap container">
         <div className="row slider-text align-items-center">
           <div className="col-xl-6 col-lg-6 col-md-6 mt-0 mt-5 mb-5">
-            <div className="event-form">
+            <div className="event-form christmas-timer">
               <h1 className="mb-4 mt-5">
                 <strong>Christmas Party</strong>
                 <br />
                 <div className="mt-3">
-                  <span>Giáng sinh 2019</span>
+                  <span style={{ color: "#dc3545" }}>Giáng sinh 2019</span>
                 </div>
               </h1>
               <div className="mb-4">
@@ -36,10 +36,10 @@ function Template(props) {
                   Saigon Finance Center.
                 </div>
               </div>
-              <Countdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)" />
+              <Countdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)"/>
               <div className="form-group">
                 <button
-                  className="btn btn-primary py-3 px-4"
+                  className="btn btn-danger py-3 px-4"
                   onClick={() => {
                     if (auth) props.history.push("/christmas-gifts");
                     else props.history.push("/sign-in");

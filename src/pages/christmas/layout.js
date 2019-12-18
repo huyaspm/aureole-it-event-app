@@ -10,7 +10,7 @@ export default function Layout({ children }) {
         alt="background"
       />
       <div className="hero-wrap container">
-        <div className="row slider-text align-items-center">
+        <div className="row slider-text chrismast-form align-items-center">
           <div className="col-xl-6 col-lg-6 col-md-6 mt-0 mt-5 mb-5">
             <h1 className="mb-4 mt-5">
               <strong>Aureole IT Inc.</strong>

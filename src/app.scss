@@ -90,6 +90,25 @@ img.background {
   text-transform: uppercase;
 }
 
+.chrismast-form {
+  h1 span {
+    font-size: 48px;
+    font-weight: 800;
+    color: #dc3545 !important;
+    text-transform: uppercase;
+  }
+
+  #timer .time {
+    color: #dc3545 !important;
+  }
+}
+
+.christmas-timer {
+  #timer .time {
+    color: #dc3545 !important;
+  }
+}
+
 @media (max-width: 767.98px) {
   .slider-text h1 {
     font-size: 24px;
@@ -217,6 +236,15 @@ img.background {
     -ms-border-radius: 0;
     border-radius: 5px;
   }
+
+  .btn-danger {
+    width: 100%;
+    display: block !important;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 5px;
+  }
 }
 
 .request-form {
@@ -239,6 +267,24 @@ img.background {
     font-size: 12vw;
     letter-spacing: 4vw;
     padding-left: 4vw;
+  }
+
+  .text-input {
+    h2 {
+      font-size: 38px;
+    }
+
+    @media (max-width: 767.98px) {
+      h2 {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      h2 {
+        font-size: 24px;
+      }
+    }
   }
 }
 
