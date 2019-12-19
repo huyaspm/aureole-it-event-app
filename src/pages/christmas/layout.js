@@ -1,7 +1,7 @@
 import React from "react";
-import Countdown from "../../components/countdown";
+import ChristmasCountdown from "./countdown";
 
-export default function Layout({ children }) {
+function Layout({ children }) {
   return (
     <div>
       <img
@@ -31,7 +31,7 @@ export default function Layout({ children }) {
                 Saigon Finance Center.
               </div>
             </div>
-            <Countdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)" />
+            <ChristmasCountdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)" />
           </div>
           <div className="col-xl-1 col-lg-1 col-md-1" />
           <div className="col-xl-5 col-lg-5 col-md-5 mt-0 mt-md-5 mb-5">
@@ -42,3 +42,5 @@ export default function Layout({ children }) {
     </div>
   );
 }
+
+export default Layout;

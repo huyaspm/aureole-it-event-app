@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Countdown from "../../components/countdown";
+import ChristmasCountdown from "./countdown";
 
 import { UserContext } from "../../contexts/user";
 
@@ -36,7 +37,7 @@ function Template(props) {
                   Saigon Finance Center.
                 </div>
               </div>
-              <Countdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)" />
+              <ChristmasCountdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)" />
               <div className="form-group">
                 <button
                   className="btn btn-danger py-3 px-4"
