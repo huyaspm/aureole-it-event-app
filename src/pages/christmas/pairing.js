@@ -44,7 +44,6 @@ function Pairing() {
   const [taken, setTaken] = useState();
 
   const [givenMessage, setGivenMessage] = useState();
-  const [takenMessage, setTakenMessage] = useState();
 
   const [control, setControl] = useState({
     start: false,
@@ -64,7 +63,6 @@ function Pairing() {
   const [taken2, setTaken2] = useState();
 
   const [givenMessage2, setGivenMessage2] = useState();
-  const [takenMessage2, setTakenMessage2] = useState();
 
   const [control2, setControl2] = useState({
     start: false,
@@ -85,7 +83,6 @@ function Pairing() {
   const [taken3, setTaken3] = useState();
 
   const [givenMessage3, setGivenMessage3] = useState();
-  const [takenMessage3, setTakenMessage3] = useState();
 
   const [control3, setControl3] = useState({
     start: false,
@@ -106,7 +103,6 @@ function Pairing() {
   const [taken4, setTaken4] = useState();
 
   const [givenMessage4, setGivenMessage4] = useState();
-  const [takenMessage4, setTakenMessage4] = useState();
 
   const [control4, setControl4] = useState({
     start: false,
@@ -127,7 +123,6 @@ function Pairing() {
   const [taken5, setTaken5] = useState();
 
   const [givenMessage5, setGivenMessage5] = useState();
-  const [takenMessage5, setTakenMessage5] = useState();
 
   const [control5, setControl5] = useState({
     start: false,
@@ -195,11 +190,6 @@ function Pairing() {
         const gift = gifts.filter(gift => gift.fullName === data.currentEl);
         setControl({ ...control, start: false, finish: true });
         takerPast.push(data.currentEl);
-        setTakenMessage(
-          gift[0].description.length > 100
-            ? gift[0].description.substring(0, 100) + "..."
-            : gift[0].description
-        );
         setTaken(gift[0]);
       }
     }
@@ -267,11 +257,6 @@ function Pairing() {
         const gift = gifts.filter(gift => gift.fullName === data.currentEl);
         takerPast.push(data.currentEl);
         setControl2({ ...control2, start: false, finish: true });
-        setTakenMessage2(
-          gift[0].description.length > 100
-            ? gift[0].description.substring(0, 100) + "..."
-            : gift[0].description
-        );
         setTaken2(gift[0]);
       }
     }
@@ -337,11 +322,6 @@ function Pairing() {
         const gift = gifts.filter(gift => gift.fullName === data.currentEl);
         takerPast.push(data.currentEl);
         setControl3({ ...control3, start: false, finish: true });
-        setTakenMessage3(
-          gift[0].description.length > 100
-            ? gift[0].description.substring(0, 100) + "..."
-            : gift[0].description
-        );
         setTaken3(gift[0]);
       }
     }
@@ -407,11 +387,6 @@ function Pairing() {
         const gift = gifts.filter(gift => gift.fullName === data.currentEl);
         takerPast.push(data.currentEl);
         setControl4({ ...control4, start: false, finish: true });
-        setTakenMessage4(
-          gift[0].description.length > 100
-            ? gift[0].description.substring(0, 100) + "..."
-            : gift[0].description
-        );
         setTaken4(gift[0]);
       }
     }
@@ -476,11 +451,6 @@ function Pairing() {
         const gift = gifts.filter(gift => gift.fullName === data.currentEl);
         takerPast.push(data.currentEl);
         setControl5({ ...control5, start: false, finish: true });
-        setTakenMessage5(
-          gift[0].description.length > 100
-            ? gift[0].description.substring(0, 100) + "..."
-            : gift[0].description
-        );
         setTaken5(gift[0]);
       }
     }
@@ -617,9 +587,6 @@ function Pairing() {
           className="ml-lg-3 ml-md-3"
         />
       </h2>
-      <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-        {control.finish && takenMessage}
-      </h6>
     </div>
   );
 
@@ -686,9 +653,6 @@ function Pairing() {
           className="ml-lg-3 ml-md-3"
         />
       </h2>
-      <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-        {control2.finish && takenMessage2}
-      </h6>
     </div>
   );
 
@@ -755,9 +719,6 @@ function Pairing() {
           className="ml-lg-3 ml-md-3"
         />
       </h2>
-      <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-        {control3.finish && takenMessage3}
-      </h6>
     </div>
   );
 
@@ -824,9 +785,6 @@ function Pairing() {
           className="ml-lg-3 ml-md-3"
         />
       </h2>
-      <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-        {control4.finish && takenMessage4}
-      </h6>
     </div>
   );
 
@@ -893,9 +851,6 @@ function Pairing() {
           className="ml-lg-3 ml-md-3"
         />
       </h2>
-      <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-        {control5.finish && takenMessage5}
-      </h6>
     </div>
   );
 
