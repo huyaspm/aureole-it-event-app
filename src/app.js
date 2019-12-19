@@ -8,11 +8,12 @@ import Splash from "./components/splashscreen";
 
 import { UserProvider } from "./contexts/user";
 import { ManagerProvider } from "./contexts/manager";
-import Pairing from "./pages/christmas/pairing";
 
 const Template = lazy(() => import("./pages/christmas/template"));
 const Signin = lazy(() => import("./pages/christmas/sign-in"));
 const Gift = lazy(() => import("./pages/christmas/gift"));
+const Wishes = lazy(() => import("./pages/christmas/wishes"));
+const Pairing = lazy(() => import("./pages/christmas/pairing"));
 
 const ManagerRoute = lazy(() => import("./route/manager"));
 const Manager = lazy(() => import("./pages/root/manager"));
@@ -25,8 +26,8 @@ const Homepage = lazy(() => import("./pages/homepage"));
 // const Signin = lazy(() => import("./pages/sign-in"));
 const Update = lazy(() => import("./pages/update"));
 
-axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
-// axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
+// axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
+axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
 
 function App() {
   const [ready, setReady] = useState(false);
@@ -61,6 +62,7 @@ function App() {
 
               <Route exact path="/root" component={Manager} />
               <ManagerRoute exact path="/root/pairing" component={Pairing} />
+              <ManagerRoute exact path='/root/christmas-wishes' component={Wishes} />
 
               {/* <ManagerRoute exact path="/root/scanner" component={Checker} />
               <ManagerRoute exact path="/root/giver" component={Giver} />

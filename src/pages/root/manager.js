@@ -73,15 +73,20 @@ function Manager(props) {
   const optionsInput = (
     <div className="request-form">
       <div className="d-flex mt-2 back-button">
-        <div
-          onClick={() => props.history.goBack()}
-          className="btn btn-light"
-        >
+        <div onClick={() => props.history.goBack()} className="btn btn-light">
           <i className="fa fa-arrow-left" />
         </div>
         <h2 className="ml-4">Quản lý</h2>
       </div>
       <div className="form-group mt-5">
+        <button
+          onClick={() => props.history.push("/root/christmas-wishes")}
+          className="btn btn-light py-3 px-4"
+        >
+          <strong>Lời chúc Giáng Sinh</strong>
+        </button>
+      </div>
+      <div className="form-group mt-4">
         <button
           onClick={() => props.history.push("/root/pairing")}
           className="btn btn-light py-3 px-4"

@@ -140,8 +140,8 @@ function Pairing() {
   useEffect(() => {
     if (!mount) {
       axios.post("/gifts").then(res => {
+        setGifts(res.data);
         res.data.forEach(gift => {
-          setGifts(res.data);
           if (gift.exchange.givenTo.uid === "") giver.push(gift.fullName);
           if (gift.exchange.takenFrom.uid === "") taker.push(gift.fullName);
         });
@@ -967,7 +967,7 @@ function Pairing() {
   return (
     <div>
       <img
-        src="/images/chistmas-background.jpg"
+        src="/images/christmas-background.jpg"
         className="background"
         alt="background"
       />
