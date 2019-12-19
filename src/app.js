@@ -25,11 +25,11 @@ const Homepage = lazy(() => import("./pages/homepage"));
 // const Signin = lazy(() => import("./pages/sign-in"));
 const Update = lazy(() => import("./pages/update"));
 
-axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
-// axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
+// axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
+axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
 
 function App() {
-  const [ready, setReady] = useState(true);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {

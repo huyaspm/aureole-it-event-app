@@ -115,7 +115,7 @@ exports.scan = async (req, res) => {
                     .status(500)
                     .json({ error: "something went wrong, try again" })
                 );
-                if (!similar) luckyNumber = randomize("0", 3);
+              if (!similar) luckyNumber = randomize("0", 3);
             }
             var user = doc.data();
             user.checked.checkedIn = true;
@@ -124,7 +124,8 @@ exports.scan = async (req, res) => {
             firestore
               .collection("users")
               .doc(doc.id)
-              .set(user);
+              .set(user)
+              .catch(err => res.status(400).json(err));
             return res.json(user);
           }
         });

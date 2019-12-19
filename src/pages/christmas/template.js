@@ -36,7 +36,7 @@ function Template(props) {
                   Saigon Finance Center.
                 </div>
               </div>
-              <Countdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)"/>
+              <Countdown eventTime="Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)" />
               <div className="form-group">
                 <button
                   className="btn btn-danger py-3 px-4"
@@ -47,11 +47,12 @@ function Template(props) {
                   disabled={
                     new Date() >
                     new Date(
-                      "Fri Dec 20 2019 16:00:00 GMT+0700 (Indochina Time)"
+                      "Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)"
                     )
                   }
                 >
-                  Đăng ký trao quà
+                  {!auth && "Đăng ký trao quà"}
+                  {auth && "Xem thông tin sự kiện"}
                 </button>
               </div>
             </div>

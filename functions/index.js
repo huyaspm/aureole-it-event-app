@@ -51,7 +51,7 @@ app.post("/gift/update/given", updateGiven);
 app.post("/gift/update/taken", updateTaken);
 
 const api = functions
-  .runWith({ memory: "2GB", timeoutSeconds: 120 })
+  .runWith({ memory: "2GB", timeoutSeconds: 30 })
   .region("asia-east2")
   .https.onRequest(app);
 

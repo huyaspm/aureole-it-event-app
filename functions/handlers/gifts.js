@@ -80,8 +80,9 @@ exports.getGift = (req, res) => {
             const gift = doc.data();
             gift.id = doc.id;
             return res.json(gift);
-          } else return res.status(400).json({ error: "unregister" });
+          }
         });
+        return res.status(400).json({ error: "unregister" });
       }
     })
     .catch(() =>

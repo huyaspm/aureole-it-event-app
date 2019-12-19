@@ -14,6 +14,7 @@ function Gift(props) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
+      if (!auth) props.history.push("/sign-in");
     }, 3000);
   });
 
@@ -89,12 +90,9 @@ function Gift(props) {
   const detailInput = (
     <form onSubmit={createDetail} className="request-form">
       <div className="d-flex mt-2 back-button">
-        <button
-          onClick={() => props.history.goBack()}
-          className="btn btn-light"
-        >
+        <div onClick={() => props.history.push("/")} className="btn btn-light">
           <i className="fa fa-arrow-left" />
-        </button>
+        </div>
         <h2 className="ml-4">Đăng ký trao quà</h2>
       </div>
       <div className="form-group mt-5">
@@ -147,8 +145,13 @@ function Gift(props) {
   );
 
   const updateInput = (
-    <div className="request-form">
-      <h2>Đăng ký thành công</h2>
+    <form onSubmit={updateDetail} className="request-form">
+      <div className="d-flex mt-2 back-button">
+        <div onClick={() => props.history.push("/")} className="btn btn-light">
+          <i className="fa fa-arrow-left" />
+        </div>
+        <h2 className="ml-4">Đăng ký thành công</h2>
+      </div>
       <div className="form-group mt-5">
         <input
           name="fullName"
@@ -170,7 +173,7 @@ function Gift(props) {
           value={values.description}
           type="text"
           className="form-control"
-          placeholder="Giới thiệu đôi nét về món quà"
+          placeholder="Lời chúc của bạn"
           aria-label="description"
           readOnly={!update}
         />
@@ -182,7 +185,7 @@ function Gift(props) {
       </div>
       {user && update && (
         <div className="form-group">
-          <button onClick={updateDetail} className="btn btn-danger py-3 px-4">
+          <button type="submit" className="btn btn-danger py-3 px-4">
             Cập nhật
           </button>
         </div>
@@ -202,7 +205,7 @@ function Gift(props) {
         </div>
       )}
       <div className="form-group mt-4">
-        <button
+        <div
           className="btn btn-light py-3 px-4"
           onClick={() => {
             signOut();
@@ -210,9 +213,9 @@ function Gift(props) {
           }}
         >
           Đăng xuất
-        </button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 
   const loadingInput = (

@@ -73,12 +73,12 @@ function Manager(props) {
   const optionsInput = (
     <div className="request-form">
       <div className="d-flex mt-2 back-button">
-        <button
+        <div
           onClick={() => props.history.goBack()}
           className="btn btn-light"
         >
           <i className="fa fa-arrow-left" />
-        </button>
+        </div>
         <h2 className="ml-4">Quản lý</h2>
       </div>
       <div className="form-group mt-5">

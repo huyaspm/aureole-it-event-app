@@ -63,12 +63,12 @@ function Signin(props) {
   const phoneInput = (
     <form onSubmit={signIn} className="request-form">
       <div className="d-flex mt-2 back-button">
-        <button
-          onClick={() => props.history.goBack()}
+        <div
+          onClick={() => props.history.push("/")}
           className="btn btn-light"
         >
           <i className="fa fa-arrow-left" />
-        </button>
+        </div>
         <h2 className="ml-4">Đăng ký ngay</h2>
       </div>
       <div className="form-group mt-5">
@@ -109,12 +109,12 @@ function Signin(props) {
   const verifyInput = (
     <form onSubmit={confirmCode} className="request-form">
       <div className="d-flex mt-2 back-button">
-        <button
-          onClick={() => props.history.goBack()}
+        <div
+          onClick={() => props.history.push("/")}
           className="btn btn-light"
         >
           <i className="fa fa-arrow-left" />
-        </button>
+        </div>
         <h2 className="ml-4">Xác thực</h2>
       </div>
       <div className="form-group mt-5">
