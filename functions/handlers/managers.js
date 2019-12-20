@@ -42,7 +42,6 @@ exports.manager = async (req, res) => {
                 });
               } else return res.status(400).json({ handle: "wrong password" });
             });
-          return res.status(400).json({ handle: "wrong password" });
         });
       }
     })
