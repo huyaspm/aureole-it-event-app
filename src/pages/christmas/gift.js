@@ -128,6 +128,10 @@ function Gift(props) {
           type="submit"
           value="Đăng ký"
           className="btn btn-danger py-3 px-4"
+          disabled={
+            new Date() >
+            new Date("Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)")
+          }
         />
       </div>
       <div className="form-group mt-4">
@@ -185,7 +189,14 @@ function Gift(props) {
       </div>
       {user && update && (
         <div className="form-group">
-          <button type="submit" className="btn btn-danger py-3 px-4">
+          <button
+            type="submit"
+            className="btn btn-danger py-3 px-4"
+            disabled={
+              new Date() >
+              new Date("Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)")
+            }
+          >
             Cập nhật
           </button>
         </div>
@@ -199,6 +210,10 @@ function Gift(props) {
               updateRef.current.focus();
             }}
             className="btn btn-light py-3 px-4"
+            disabled={
+              new Date() >
+              new Date("Fri Dec 20 2019 16:30:00 GMT+0700 (Indochina Time)")
+            }
           >
             Thay đổi thông tin
           </button>
