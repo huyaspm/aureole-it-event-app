@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy, useContext } from "react";
+import React, { useEffect, useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -17,17 +17,17 @@ const Pairing = lazy(() => import("./pages/christmas/pairing"));
 
 const ManagerRoute = lazy(() => import("./route/manager"));
 const Manager = lazy(() => import("./pages/root/manager"));
-const Checker = lazy(() => import("./pages/root/checker"));
-const Giver = lazy(() => import("./pages/root/giver"));
-const Spinner = lazy(() => import("./pages/root/spinner"));
-const Admin = lazy(() => import("./pages/root/admin"));
+// const Checker = lazy(() => import("./pages/root/checker"));
+// const Giver = lazy(() => import("./pages/root/giver"));
+// const Spinner = lazy(() => import("./pages/root/spinner"));
+// const Admin = lazy(() => import("./pages/root/admin"));
 
-const Homepage = lazy(() => import("./pages/homepage"));
+// const Homepage = lazy(() => import("./pages/homepage"));
 // const Signin = lazy(() => import("./pages/sign-in"));
-const Update = lazy(() => import("./pages/update"));
+// const Update = lazy(() => import("./pages/update"));
 
-// axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
-axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
+axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
+// axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
 
 function App() {
   const [ready, setReady] = useState(false);
@@ -52,18 +52,19 @@ function App() {
             }
           >
             <Switch>
-              <Route exact path="/" component={Template} />
+              <Route exact path="/" component={Template} /> */}
               <Route exact path="/sign-in" component={Signin} />
               <Route exact path="/christmas-gifts" component={Gift} />
-
-              {/* <Route exact path="/" component={Homepage} /> */}
-              {/* <Route exact path="/sign-in" component={Signin} />
+              {/* <Route exact path="/" component={Homepage} />
+              <Route exact path="/sign-in" component={Signin} />
               <Route exact path="/update" component={Update} /> */}
-
               <Route exact path="/root" component={Manager} />
               <ManagerRoute exact path="/root/pairing" component={Pairing} />
-              <ManagerRoute exact path='/root/christmas-wishes' component={Wishes} />
-
+              <ManagerRoute
+                exact
+                path="/root/christmas-wishes"
+                component={Wishes}
+              />
               {/* <ManagerRoute exact path="/root/scanner" component={Checker} />
               <ManagerRoute exact path="/root/giver" component={Giver} />
               <ManagerRoute

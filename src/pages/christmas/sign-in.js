@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/user";
 import Layout from "./layout";
 
 function Signin(props) {
-  const { auth, user } = useContext(UserContext);
+  const { auth } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const recaptchaWrapperRef = useRef();
 

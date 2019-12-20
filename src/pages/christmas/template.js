@@ -3,6 +3,7 @@ import Countdown from "../../components/countdown";
 import ChristmasCountdown from "./countdown";
 
 import { UserContext } from "../../contexts/user";
+import Navigation from "./navigation";
 
 function Template(props) {
   const { auth } = useContext(UserContext);
@@ -16,7 +17,8 @@ function Template(props) {
       />
       <div className="hero-wrap container">
         <div className="row slider-text align-items-center">
-          <div className="col-xl-6 col-lg-6 col-md-6 mt-0 mt-5 mb-5">
+            <Navigation />
+          <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
             <div className="event-form christmas-timer">
               <h1 className="mb-4 mt-5">
                 <strong>Christmas Party</strong>
@@ -58,7 +60,7 @@ function Template(props) {
               </div>
             </div>
           </div>
-          <div className="col-xl-6 col-lg-6 col-md-6 mt-0 mt-md-5 mb-5">
+          <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
             <div className="event-form">
               <h1 className="mb-4 mt-5">
                 <strong>Year-End Party</strong>

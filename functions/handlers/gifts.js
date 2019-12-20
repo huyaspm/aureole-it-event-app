@@ -112,6 +112,25 @@ exports.getGifts = (req, res) => {
     );
 };
 
+exports.getWishes = (req, res) => {
+  const wishes = [];
+  firestore
+    .collection("gifts")
+    .get()
+    .then(data => {
+      if (data.empty) res.status(400).json({ error: "gift is empty" });
+      else {
+        data.forEach(doc => {
+          wishes.push(doc.data().description);
+        });
+        return res.json(wishes);
+      }
+    })
+    .catch(() =>
+      res.status(500).json({ error: "something went wrong, try again" })
+    );
+};
+
 exports.updateGiven = (req, res) => {
   firestore
     .collection("gifts")

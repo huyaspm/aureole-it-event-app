@@ -13,7 +13,7 @@ function Homepage(props) {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-    if (
+    if ( 
       new Date() >=
       new Date("Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)")
     ) {
@@ -204,6 +204,7 @@ function Homepage(props) {
   return (
     <Layout>
       {!loading && !auth && !user && props.history.push("/sign-in")}
+      {!loading && auth && !user && props.history.push("/update")}
       {loading && !user && loadingInput}
       {auth && user && !user.checked.checkedIn && codeDetail}
       {auth &&

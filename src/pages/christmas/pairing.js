@@ -598,7 +598,7 @@ function Pairing() {
           {!first && (
             <div className="col-1 mt-5 mb-lg-3">
               <h2>
-                <i className="fa fa-arrow-right"></i>
+                <i className={control.finish ? "fa fa-arrow-right" : ""}></i>
               </h2>
             </div>
           )}
@@ -664,7 +664,7 @@ function Pairing() {
           {!first && (
             <div className="col-1 mb-lg-3">
               <h2>
-                <i className="fa fa-arrow-right"></i>
+                <i className={control2.finish ? "fa fa-arrow-right" : ""}></i>
               </h2>
             </div>
           )}
@@ -730,7 +730,7 @@ function Pairing() {
           {!first && (
             <div className="col-1 mb-lg-3">
               <h2>
-                <i className="fa fa-arrow-right"></i>
+                <i className={control3.finish ? "fa fa-arrow-right" : ""}></i>
               </h2>
             </div>
           )}
@@ -796,7 +796,7 @@ function Pairing() {
           {!first && (
             <div className="col-1 mb-lg-3">
               <h2>
-                <i className="fa fa-arrow-right"></i>
+                <i className={control4.finish ? "fa fa-arrow-right" : ""}></i>
               </h2>
             </div>
           )}
@@ -862,7 +862,7 @@ function Pairing() {
           {!first && (
             <div className="col-1 mb-lg-3">
               <h2>
-                <i className="fa fa-arrow-right"></i>
+                <i className={control5.finish ? "fa fa-arrow-right" : ""}></i>
               </h2>
             </div>
           )}
@@ -887,6 +887,46 @@ function Pairing() {
     </div>
   );
 
+  const lastOnce = () => {
+    const currGiven = gifts.filter(gift => gift.fullName === giver[0]);
+    setGiven(currGiven);
+    setGivenMessage(currGiven.description);
+    const currTaken = gifts.filter(gift => gift.fullName === taker[0]);
+    setTaken(currTaken);
+
+    return (
+      <div className="form-group">
+        <div className="row text-input">
+          <div className="col-5 mt-5 mb-lg-3">
+            <h2>{giver[0]}</h2>
+            <h6 className="ml-lg-3 ml-md-3 mt-lg-4">{givenMessage}</h6>
+          </div>
+          <div className="col-1 mt-5 mb-lg-3">
+            <h2>
+              <i className="fa fa-arrow-right"></i>
+            </h2>
+          </div>
+          <div className="col-5 mt-5 mb-lg-3">
+            <h2>{taker[0]}</h2>
+          </div>
+          <div className="col-1 text-center mt-5 mb-lg-3">
+            <button
+              style={{ height: "50px" }}
+              className={
+                control.success ? "btn btn-success" : "btn btn-secondary"
+              }
+              onClick={updateStatus}
+            >
+              <strong>
+                <i className="fa fa-check"></i>
+              </strong>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const spinnerInput = (
     <div className="request-form">
       <div className="form-group text-right">
@@ -904,44 +944,7 @@ function Pairing() {
       {control4.active && textLoop4}
       {control5.active && textLoop5}
 
-      {!first && giver.length === 1 && (
-        <div className="form-group">
-          <div className="row text-input">
-            <div className="col-5 mt-5 mb-lg-3">
-              <h2>{giver[0]}</h2>
-              <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-                {control.finish && givenMessage}
-              </h6>
-            </div>
-            <div className="col-1 mt-5 mb-lg-3">
-              <h2>
-                <i className="fa fa-arrow-right"></i>
-              </h2>
-            </div>
-            <div className="col-5 mt-5 mb-lg-3">
-              <h2>{taker[0]}</h2>
-              <h6 className="ml-lg-3 ml-md-3 mt-lg-4">
-                {control.finish && givenMessage}
-              </h6>
-            </div>
-            <div className="col-1 text-center mt-5 mb-lg-3">
-              {control.finish && given && taken && (
-                <button
-                  style={{ height: "50px" }}
-                  className={
-                    control.success ? "btn btn-success" : "btn btn-secondary"
-                  }
-                  onClick={updateStatus}
-                >
-                  <strong>
-                    <i className="fa fa-check"></i>
-                  </strong>
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {!first && giver.length === 1 && lastOnce}
 
       <div className="form-group spinner">
         {!control.start && control.finish && (

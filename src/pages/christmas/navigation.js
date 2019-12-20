@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import SplitText from "react-pose-text";
 import axios from "axios";
-
-import { ManagerContext } from "../../contexts/manager";
 
 const charPoses = {
   exit: { opacity: 0, y: 20 },
@@ -27,8 +25,7 @@ function shuffle(array) {
   return array;
 }
 
-function Wishes() {
-  useContext(ManagerContext);
+function Navigation() {
   const [mount, setMount] = useState(false);
   const [wishes, setWishes] = useState([]);
   const [speed, setSpeed] = useState();
@@ -36,9 +33,9 @@ function Wishes() {
 
   useEffect(() => {
     if (!mount) {
-      axios.post("/gifts").then(res => {
-        res.data.forEach(gift => {
-          if (gift.description !== "") wishes.push(gift.description);
+      axios.get("/gift/wishes").then(res => {
+        res.data.forEach(wish => {
+          if (wish !== "") wishes.push(wish);
         });
       });
     }
@@ -49,7 +46,11 @@ function Wishes() {
     setTimeout(
       () => {
         setWishes(shuffle(wishes));
-        setWish(wishes[0]);
+        setWish(
+          wishes[0].length > 200
+            ? wishes[0].substring(0, 200) + "..."
+            : wishes[0]
+        );
         setSpeed(wishes[0].length * 100 + 1500);
       },
       speed ? speed : 3000
@@ -57,40 +58,27 @@ function Wishes() {
   }, [speed]);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       window.location.reload();
     }, 120000);
+    return clearTimeout(timeout);
   });
 
   return (
-    <div>
-      <img
-        src="/images/christmas-background.jpg"
-        className="background"
-        alt="background"
-      />
-      <div className="hero-wrap container">
-        <div className="row slider-text align-items-center">
-          <div className="col-12 text-center wishes christmas-card">
-            <div className="special-card" />
-            <h1>
-              <span>
-                {wishes && (
-                  <SplitText
-                    initialPose="exit"
-                    pose="enter"
-                    charPoses={charPoses}
-                  >
-                    {wish}
-                  </SplitText>
-                )}
-              </span>
-            </h1>
-          </div>
+    <>
+      {wishes && (
+        <div className="col-12 text-center christmas-navbar mt-5">
+          <h1>
+            <span style={{ fontSize: "18px" }}>
+              <SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
+                {wish}
+              </SplitText>
+            </span>
+          </h1>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
-export default Wishes;
+export default Navigation;
