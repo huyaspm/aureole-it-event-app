@@ -10,17 +10,13 @@ import { UserProvider } from "./contexts/user";
 import { ManagerProvider } from "./contexts/manager";
 
 const Template = lazy(() => import("./pages/christmas/template"));
-const Signin = lazy(() => import("./pages/christmas/sign-in"));
-const Gift = lazy(() => import("./pages/christmas/gift"));
-const Wishes = lazy(() => import("./pages/christmas/wishes"));
-const Pairing = lazy(() => import("./pages/christmas/pairing"));
 
 const ManagerRoute = lazy(() => import("./route/manager"));
 const Manager = lazy(() => import("./pages/root/manager"));
 // const Checker = lazy(() => import("./pages/root/checker"));
 // const Giver = lazy(() => import("./pages/root/giver"));
 // const Spinner = lazy(() => import("./pages/root/spinner"));
-// const Admin = lazy(() => import("./pages/root/admin"));
+const Admin = lazy(() => import("./pages/root/admin"));
 
 // const Homepage = lazy(() => import("./pages/homepage"));
 // const Signin = lazy(() => import("./pages/sign-in"));
@@ -52,27 +48,20 @@ function App() {
             }
           >
             <Switch>
-              <Route exact path="/" component={Template} /> */}
-              <Route exact path="/sign-in" component={Signin} />
-              <Route exact path="/christmas-gifts" component={Gift} />
+              <Route exact path="/" component={Template} />
               {/* <Route exact path="/" component={Homepage} />
               <Route exact path="/sign-in" component={Signin} />
               <Route exact path="/update" component={Update} /> */}
               <Route exact path="/root" component={Manager} />
-              <ManagerRoute exact path="/root/pairing" component={Pairing} />
-              <ManagerRoute
-                exact
-                path="/root/christmas-wishes"
-                component={Wishes}
-              />
+     
               {/* <ManagerRoute exact path="/root/scanner" component={Checker} />
               <ManagerRoute exact path="/root/giver" component={Giver} />
               <ManagerRoute
                 exact
                 path="/root/lucky-number"
                 component={Spinner}
-              />
-              <ManagerRoute exact path="/root/admin" component={Admin} /> */}
+              /> */}
+              <ManagerRoute exact path="/root/admin" component={Admin} />
               <Route component={Template} />
             </Switch>
           </Suspense>

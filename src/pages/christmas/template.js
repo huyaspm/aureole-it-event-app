@@ -17,7 +17,36 @@ function Template(props) {
       />
       <div className="hero-wrap container">
         <div className="row slider-text align-items-center">
-            <Navigation />
+          <Navigation />
+          <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
+            <div className="event-form">
+              <h1 className="mb-4 mt-5">
+                <strong>Year-End Party</strong>
+                <br />
+                <div className="mt-3">
+                  <span>Tất niên 2019</span>
+                </div>
+              </h1>
+              <div className="mb-4">
+                <i className="fa fa-calendar-check-o mr-3" />
+                18:00 Giờ - Thứ 6, Ngày 10.01.2020
+                <div className="mt-3">
+                  <i className="fa fa-building-o mr-3"></i>BA GÁC NƯỚNG & BIA
+                  RESTAURANT
+                </div>
+                <div className="mt-3">
+                  <i className="fa fa-location-arrow mr-3"></i>31 Lê Quý Đôn,
+                  Phường 7, Quận 3, TP. HCM
+                </div>
+              </div>
+              <Countdown eventTime="Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)" />
+              <div className="form-group">
+                <button className="btn btn-primary py-3 px-4" disabled>
+                  Chưa mở đăng ký
+                </button>
+              </div>
+            </div>
+          </div>
           <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
             <div className="event-form christmas-timer">
               <h1 className="mb-4 mt-5">
@@ -54,37 +83,7 @@ function Template(props) {
                     )
                   }
                 >
-                  {!auth && "Đăng ký trao quà"}
-                  {auth && "Xem thông tin sự kiện"}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
-            <div className="event-form">
-              <h1 className="mb-4 mt-5">
-                <strong>Year-End Party</strong>
-                <br />
-                <div className="mt-3">
-                  <span>Tất niên 2019</span>
-                </div>
-              </h1>
-              <div className="mb-4">
-                <i className="fa fa-calendar-check-o mr-3" />
-                18:00 Giờ - Thứ 6, Ngày 10.01.2020
-                <div className="mt-3">
-                  <i className="fa fa-building-o mr-3"></i>BA GÁC NƯỚNG & BIA
-                  RESTAURANT
-                </div>
-                <div className="mt-3">
-                  <i className="fa fa-location-arrow mr-3"></i>31 Lê Quý Đôn,
-                  Phường 7, Quận 3, TP. HCM
-                </div>
-              </div>
-              <Countdown eventTime="Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)" />
-              <div className="form-group">
-                <button className="btn btn-primary py-3 px-4" disabled>
-                  Chưa mở đăng ký
+                  Hết hạn đăng ký
                 </button>
               </div>
             </div>

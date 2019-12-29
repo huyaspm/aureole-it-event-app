@@ -79,7 +79,7 @@ function Countdown({ eventTime }) {
     </div>
   ) : (
     <h2 className="mt-5 mb-5">
-      <em>Trong thời gian sự kiện</em>
+      <em>Sự kiện kết thúc</em>
     </h2>
   );
 }

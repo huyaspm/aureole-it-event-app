@@ -23,15 +23,15 @@ const UserProvider = props => {
         //   })
         //   .catch(err => console.log(err));
 
-        axios
-          .post("/gift", {
-            uid: user.toJSON().uid
-          })
-          .then(res => {
-            if (res.data)
-              setGlobal({ ...global, auth: user.toJSON(), user: res.data });
-          })
-          .catch(err => console.log(err));
+        // axios
+        //   .post("/gift", {
+        //     uid: user.toJSON().uid
+        //   })
+        //   .then(res => {
+        //     if (res.data)
+        //       setGlobal({ ...global, auth: user.toJSON(), user: res.data });
+        //   })
+        //   .catch(err => console.log(err));
       }
     });
     setSyncing(false)

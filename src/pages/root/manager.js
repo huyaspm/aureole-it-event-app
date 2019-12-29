@@ -70,87 +70,88 @@ function Manager(props) {
     </form>
   );
 
-  const optionsInput = (
-    <div className="request-form">
-      <div className="d-flex mt-2 back-button">
-        <div onClick={() => props.history.goBack()} className="btn btn-light">
-          <i className="fa fa-arrow-left" />
-        </div>
-        <h2 className="ml-4">Quản lý</h2>
-      </div>
-      <div className="form-group mt-5">
-        <button
-          onClick={() => props.history.push("/root/christmas-wishes")}
-          className="btn btn-light py-3 px-4"
-        >
-          <strong>Lời chúc Giáng Sinh</strong>
-        </button>
-      </div>
-      <div className="form-group mt-4">
-        <button
-          onClick={() => props.history.push("/root/pairing")}
-          className="btn btn-light py-3 px-4"
-        >
-          <strong>Quay trao quà</strong>
-        </button>
-      </div>
-      <div className="form-group mt-4">
-        <button
-          onClick={() => context.signOut()}
-          className="btn btn-light py-3 px-4"
-        >
-          <strong>Đăng xuất</strong>
-        </button>
-      </div>
-    </div>
-  );
-
   // const optionsInput = (
   //   <div className="request-form">
   //     <div className="d-flex mt-2 back-button">
-  //       <button
-  //         onClick={() => props.history.goBack()}
-  //         className="btn btn-light"
-  //       >
+  //       <div onClick={() => props.history.goBack()} className="btn btn-light">
   //         <i className="fa fa-arrow-left" />
-  //       </button>
+  //       </div>
   //       <h2 className="ml-4">Quản lý</h2>
   //     </div>
   //     <div className="form-group mt-5">
   //       <button
-  //         onClick={() => props.history.push("/root/scanner")}
+  //         onClick={() => props.history.push("/root/christmas-wishes")}
   //         className="btn btn-light py-3 px-4"
   //       >
-  //         <strong>Quét điểm danh</strong>
+  //         <strong>Lời chúc Giáng Sinh</strong>
   //       </button>
   //     </div>
   //     <div className="form-group mt-4">
   //       <button
-  //         onClick={() => props.history.push("/root/giver")}
+  //         onClick={() => props.history.push("/root/pairing")}
   //         className="btn btn-light py-3 px-4"
   //       >
-  //         <strong>Quét trao quà</strong>
+  //         <strong>Quay trao quà</strong>
   //       </button>
   //     </div>
   //     <div className="form-group mt-4">
   //       <button
-  //         onClick={() => props.history.push("/root/lucky-number")}
+  //         onClick={() => context.signOut()}
   //         className="btn btn-light py-3 px-4"
-  //         disabled={context.manager && context.manager.permission.type !== 0}
   //       >
-  //         <strong>Quay may mắn</strong>
+  //         <strong>Đăng xuất</strong>
   //       </button>
-  //       <div className="form-group mt-4">
-  //         <button
-  //           onClick={() => context.signOut()}
-  //           className="btn btn-light py-3 px-4"
-  //         >
-  //           <strong>Đăng xuất</strong>
-  //         </button>
-  //       </div>
   //     </div>
   //   </div>
   // );
+
+  const optionsInput = (
+    <div className="request-form">
+      <div className="d-flex mt-2 back-button">
+        <button
+          onClick={() => props.history.goBack()}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </button>
+        <h2 className="ml-4">Quản lý</h2>
+      </div>
+      <div className="form-group mt-5">
+        <button
+          onClick={() => props.history.push("/root/scanner")}
+          className="btn btn-light py-3 px-4" disabled
+        >
+          <strong>Quét điểm danh</strong>
+        </button>
+      </div>
+      <div className="form-group mt-4">
+        <button
+          onClick={() => props.history.push("/root/giver")}
+          className="btn btn-light py-3 px-4" disabled
+        >
+          <strong>Quét trao quà</strong>
+        </button>
+      </div>
+      <div className="form-group mt-4">
+        <button
+          onClick={() => props.history.push("/root/lucky-number")}
+          className="btn btn-light py-3 px-4"
+          // disabled={context.manager && context.manager.permission.type !== 0}
+          disabled
+        >
+          <strong>Quay may mắn</strong>
+        </button>
+        <div className="form-group mt-4">
+          <button
+            onClick={() => context.signOut()}
+            className="btn btn-light py-3 px-4"
+          >
+            <strong>Đăng xuất</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div>
