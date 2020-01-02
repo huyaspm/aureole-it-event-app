@@ -13,17 +13,17 @@ const Template = lazy(() => import("./pages/christmas/template"));
 
 const ManagerRoute = lazy(() => import("./route/manager"));
 const Manager = lazy(() => import("./pages/root/manager"));
-// const Checker = lazy(() => import("./pages/root/checker"));
-// const Giver = lazy(() => import("./pages/root/giver"));
-// const Spinner = lazy(() => import("./pages/root/spinner"));
+const Checker = lazy(() => import("./pages/root/checker"));
+const Giver = lazy(() => import("./pages/root/giver"));
+const Spinner = lazy(() => import("./pages/root/spinner"));
 const Admin = lazy(() => import("./pages/root/admin"));
 
-// const Homepage = lazy(() => import("./pages/homepage"));
-// const Signin = lazy(() => import("./pages/sign-in"));
-// const Update = lazy(() => import("./pages/update"));
+const Homepage = lazy(() => import("./pages/homepage"));
+const Signin = lazy(() => import("./pages/sign-in"));
+const Update = lazy(() => import("./pages/update"));
 
-axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
-// axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
+// axios.defaults.baseURL = "https://asia-east2-ait-app.cloudfunctions.net/api";
+axios.defaults.baseURL = "http://localhost:5000/ait-app/asia-east2/api";
 
 function App() {
   const [ready, setReady] = useState(false);
@@ -41,7 +41,7 @@ function App() {
           <Suspense
             fallback={
               <img
-                src="/images/christmas-background.jpg"
+                src="/images/new-year-background.jpg"
                 className="background"
                 alt="background"
               />
@@ -49,18 +49,18 @@ function App() {
           >
             <Switch>
               <Route exact path="/" component={Template} />
-              {/* <Route exact path="/" component={Homepage} />
+              <Route exact path="/yearend-party" component={Homepage} />
               <Route exact path="/sign-in" component={Signin} />
-              <Route exact path="/update" component={Update} /> */}
+              <Route exact path="/update" component={Update} />
               <Route exact path="/root" component={Manager} />
      
-              {/* <ManagerRoute exact path="/root/scanner" component={Checker} />
+              <ManagerRoute exact path="/root/scanner" component={Checker} />
               <ManagerRoute exact path="/root/giver" component={Giver} />
               <ManagerRoute
                 exact
                 path="/root/lucky-number"
                 component={Spinner}
-              /> */}
+              />
               <ManagerRoute exact path="/root/admin" component={Admin} />
               <Route component={Template} />
             </Switch>

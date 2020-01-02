@@ -29,9 +29,8 @@ exports.register = async (req, res) => {
       checkedAt: ""
     },
     gifts: {
-      luckyMoney: "",
       luckyNumber: "",
-      gift: "",
+      set: "",
       taken: false,
       takenAt: ""
     },
@@ -87,6 +86,7 @@ exports.user = (req, res) => {
           };
           return res.json(user);
         });
+        return res.status(400).json({ handle: "user not found" });
       } else {
         return res.status(400).json({ handle: "user not found" });
       }

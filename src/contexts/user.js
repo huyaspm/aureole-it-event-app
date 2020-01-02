@@ -13,15 +13,15 @@ const UserProvider = props => {
       if (user) {
         setGlobal({ ...global, auth: user.toJSON() });
 
-        // axios
-        //   .post("/user", {
-        //     uid: user.toJSON().uid
-        //   })
-        //   .then(res => {
-        //     if (res.data)
-        //       setGlobal({ ...global, auth: user.toJSON(), user: res.data });
-        //   })
-        //   .catch(err => console.log(err));
+        axios
+          .post("/user", {
+            uid: user.toJSON().uid
+          })
+          .then(res => {
+            if (res.data)
+              setGlobal({ ...global, auth: user.toJSON(), user: res.data });
+          })
+          .catch(err => console.log(err));
 
         // axios
         //   .post("/gift", {

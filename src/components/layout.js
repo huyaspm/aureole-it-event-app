@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <div>
       <img
-        src="/images/background.jpg"
+        src="/images/new-year-background.jpg"
         className="background"
         alt="background"
       />

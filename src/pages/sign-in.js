@@ -61,7 +61,15 @@ function Signin(props) {
 
   const phoneInput = (
     <form onSubmit={signIn} className="request-form">
-      <h2>Đăng ký ngay</h2>
+      <div className="d-flex mt-2 back-button">
+        <div
+          onClick={() => props.history.push("/")}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </div>
+        <h2 className="ml-4">Đăng ký ngay</h2>
+      </div>
       <div className="form-group mt-5">
         <div className="input-group">
           <div className="input-group-append">

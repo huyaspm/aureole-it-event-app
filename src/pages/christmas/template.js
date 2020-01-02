@@ -11,14 +11,14 @@ function Template(props) {
   return (
     <div>
       <img
-        src="/images/christmas-background.jpg"
+        src="/images/new-year-background.jpg"
         className="background"
         alt="background"
       />
       <div className="hero-wrap container">
         <div className="row slider-text align-items-center">
-          <Navigation />
-          <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
+          {/* <Navigation /> */}
+          <div className="col-xl-6 col-lg-6 col-md-6 mb-5 first-form">
             <div className="event-form">
               <h1 className="mb-4 mt-5">
                 <strong>Year-End Party</strong>
@@ -41,12 +41,15 @@ function Template(props) {
               </div>
               <Countdown eventTime="Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)" />
               <div className="form-group">
-                <button className="btn btn-primary py-3 px-4" disabled>
-                  Chưa mở đăng ký
+                <button
+                  className="btn btn-primary py-3 px-4"
+                  onClick={() => props.history.push("/yearend-party")}
+                >
+                  Đăng ký tham gia, nhận quà
                 </button>
               </div>
             </div>
-          </div>
+          </div>  
           <div className="col-xl-6 col-lg-6 col-md-6 mb-5">
             <div className="event-form christmas-timer">
               <h1 className="mb-4 mt-5">

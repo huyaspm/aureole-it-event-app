@@ -78,7 +78,7 @@ function Countdown({ eventTime }) {
       </div>
     </div>
   ) : (
-    <h2 className="mt-5 mb-5">
+    <h2 className="mt-5 mb-5" style={{ height: "54px" }}>
       <em>Sự kiện kết thúc</em>
     </h2>
   );

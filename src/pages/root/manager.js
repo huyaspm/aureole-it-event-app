@@ -119,7 +119,7 @@ function Manager(props) {
       <div className="form-group mt-5">
         <button
           onClick={() => props.history.push("/root/scanner")}
-          className="btn btn-light py-3 px-4" disabled
+          className="btn btn-light py-3 px-4" 
         >
           <strong>Quét điểm danh</strong>
         </button>
@@ -127,7 +127,7 @@ function Manager(props) {
       <div className="form-group mt-4">
         <button
           onClick={() => props.history.push("/root/giver")}
-          className="btn btn-light py-3 px-4" disabled
+          className="btn btn-light py-3 px-4" 
         >
           <strong>Quét trao quà</strong>
         </button>
@@ -136,8 +136,8 @@ function Manager(props) {
         <button
           onClick={() => props.history.push("/root/lucky-number")}
           className="btn btn-light py-3 px-4"
-          // disabled={context.manager && context.manager.permission.type !== 0}
-          disabled
+          disabled={context.manager && context.manager.permission.type !== 0}
+          
         >
           <strong>Quay may mắn</strong>
         </button>

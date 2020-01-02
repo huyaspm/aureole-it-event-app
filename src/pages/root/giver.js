@@ -12,7 +12,6 @@ function Giver(props) {
   const [gifts, setGifts] = useState({
     uid: "",
     gift: "",
-    luckyMoney: ""
   });
 
   useEffect(() => {
@@ -47,8 +46,7 @@ function Giver(props) {
           setGifts({
             ...gifts,
             uid: res.data.uid,
-            gift: res.data.gifts.gift,
-            luckyMoney: res.data.gifts.luckyMoney
+            gift: res.data.gifts.set
           });
         })
         .catch(err => {
@@ -78,8 +76,7 @@ function Giver(props) {
         setMessage("Trao quà thành công");
         setGifts({
           uid: "",
-          gift: "",
-          luckyMoney: ""
+          gift: ""
         });
       })
       .catch(() => {
@@ -156,23 +153,20 @@ function Giver(props) {
               </div>
               <div className="form-group mt-4">
                 <label>
-                  Quà: <strong>{gifts.gift}</strong>
+                  Set quà:{" "}
+                  <strong className="ml-3" style={{ fontSize: "28px" }}>
+                    {gifts.gift}
+                  </strong>
                 </label>
               </div>
               <div className="form-group">
-                <label>
-                  Lì xì: <strong>{gifts.luckyMoney}</strong>
-                </label>
-              </div>
-              <div className="form-group">
-                {gifts.uid && (
-                  <button
-                    onClick={givingGifts}
-                    className="btn btn-primary py-3 px-4"
-                  >
-                    Trao quà
-                  </button>
-                )}
+                <button
+                  onClick={givingGifts}
+                  className="btn btn-primary py-3 px-4"
+                  disabled={!gifts.uid}
+                >
+                  Trao quà
+                </button>
               </div>
             </div>
           </div>

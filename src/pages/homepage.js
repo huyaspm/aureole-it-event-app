@@ -13,9 +13,10 @@ function Homepage(props) {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-    if ( 
-      new Date() >=
-      new Date("Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)")
+    if (
+      // new Date() >=
+      // new Date("Fri Jan 10 2020 18:00:00 GMT+0700 (Indochina Time)")
+      true
     ) {
       if (user && !user.checked.checkedIn) {
         axios
@@ -46,7 +47,15 @@ function Homepage(props) {
 
   const codeDetail = (
     <div className="request-form">
-      <h2>Đã đăng ký</h2>
+      <div className="d-flex mt-2 back-button">
+        <div
+          onClick={() => props.history.push("/")}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </div>
+        <h2 className="ml-4">Đã đăng ký</h2>
+      </div>
       <div className="form-group mt-5">
         <label>
           Tên: <strong>{user && user.fullName}</strong>
@@ -67,7 +76,7 @@ function Homepage(props) {
           className="img-fluid"
           value={user && user.checked && user.checked.ticketCode}
           level="H"
-          size="256"
+          size={256}
         ></QRCode>
       </div>
       <div className="form-group mt-4">
@@ -86,7 +95,15 @@ function Homepage(props) {
 
   const giftDetail = (
     <div className="request-form">
-      <h2>Quà tham dự</h2>
+      <div className="d-flex mt-2 back-button">
+        <div
+          onClick={() => props.history.push("/")}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </div>
+        <h2 className="ml-4">Quà tham dự</h2>
+      </div>
       <div className="form-group mt-5">
         <label>
           Tên: <strong>{user && user.fullName}</strong>
@@ -104,12 +121,7 @@ function Homepage(props) {
       </div>
       <div className="form-group">
         <label>
-          Quà: <strong>{user && user.gifts.gift}</strong>
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Lì xì: <strong>{user && user.gifts.luckyMoney}</strong>
+          Set quà: <strong>{user && user.gifts.set}</strong>
         </label>
       </div>
       <div className="form-group">
@@ -122,7 +134,7 @@ function Homepage(props) {
           className="img-fluid"
           value={user && user.checked && user.checked.ticketCode}
           level="H"
-          size="256"
+          size={256}
         ></QRCode>
       </div>
       <div className="form-group mt-5">
@@ -141,7 +153,15 @@ function Homepage(props) {
 
   const finishedDetail = (
     <div className="request-form">
-      <h2>Đã hoàn tất</h2>
+      <div className="d-flex mt-2 back-button">
+        <div
+          onClick={() => props.history.push("/")}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </div>
+        <h2 className="ml-4">Đã hoàn tất</h2>
+      </div>
       <div className="form-group mt-5">
         <label>
           Tên: <strong>{user && user.fullName}</strong>
@@ -159,12 +179,7 @@ function Homepage(props) {
       </div>
       <div className="form-group">
         <label style={{ textDecoration: "line-through" }}>
-          Quà: <strong>{user && user.gifts.gift}</strong>
-        </label>
-      </div>
-      <div className="form-group">
-        <label style={{ textDecoration: "line-through" }}>
-          Lì xì: <strong>{user && user.gifts.luckyMoney}</strong>
+          Set quà: <strong>{user && user.gifts.set}</strong>
         </label>
       </div>
       <div className="form-group">

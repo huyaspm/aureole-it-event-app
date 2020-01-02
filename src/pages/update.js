@@ -7,11 +7,28 @@ import Layout from "../components/layout";
 function Update(props) {
   const { auth, user, updateUser, signOut } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
+  const [mount, setMount] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+  });
+
+  useEffect(() => {
+    if (!mount) {
+      if (auth && !user) {
+        setMount(true);
+        axios
+          .post("/gift", {
+            uid: auth.uid
+          })
+          .then(res => {
+            if (res.data) setValues({ ...values, fullName: res.data.fullName });
+          })
+          .catch(err => console.log(err));
+      }
+    }
   });
 
   const [values, setValues] = useState({
@@ -48,7 +65,15 @@ function Update(props) {
 
   const detailInput = (
     <form onSubmit={updateDetail} className="request-form">
-      <h2>Cập nhật</h2>
+      <div className="d-flex mt-2 back-button">
+        <div
+          onClick={() => props.history.push("/")}
+          className="btn btn-light"
+        >
+          <i className="fa fa-arrow-left" />
+        </div>
+        <h2 className="ml-4">Cập nhật</h2>
+      </div>
       <div className="form-group mt-5">
         <input
           name="fullName"
@@ -123,7 +148,7 @@ function Update(props) {
 
   return (
     <Layout>
-      {!loading && auth && user && props.history.push("/")}
+      {!loading && auth && user && props.history.push("/yearend-party")}
       {loading && !auth && loadingInput}
       {auth && !user && detailInput}
     </Layout>
