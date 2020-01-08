@@ -3,12 +3,12 @@ import Countdown from "../components/countdown";
 
 function Detail() {
   return (
-    <div className="col-lg-6 col-md-5">
+    <div className="col-lg-6 col-md-5 year-end-timer">
       <h1 className="mb-4 mt-5">
         <strong>Aureole IT Inc.</strong>
         <br />
         <div className="mt-3">
-          <span>Tất niên 2019</span>
+          <span style={{ color: "#E5C100" }}>Tất niên 2019</span>
         </div>
       </h1>
       <div className="mb-4">

@@ -115,7 +115,7 @@ function Update(props) {
         <input
           type="submit"
           value="Cập nhật"
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-warning py-3 px-4"
         />
       </div>
       <div className="form-group mt-4 text-center">

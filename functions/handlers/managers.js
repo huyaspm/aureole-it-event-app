@@ -2,6 +2,7 @@ const { firestore } = require("../utils/admin");
 const bcrypt = require("bcryptjs");
 const randomize = require("randomatic");
 const jwt = require("jsonwebtoken");
+const { validateRegister } = require("../utils/validate");
 const auth = require("../utils/auth");
 
 const generate = manager => {
@@ -206,6 +207,65 @@ exports.lucky = async (req, res) => {
         lucky.push(doc.data());
       });
       return res.json(lucky);
+    })
+    .catch(() =>
+      res.status(500).json({ error: "something went wrong, try again" })
+    );
+};
+
+exports.email = async (req, res) => {
+  auth(req, res);
+  var luckyNumber = randomize("0", 3);
+  var similar = false;
+  while (!similar) {
+    await firestore
+      .collection("users")
+      .where("gifts.luckyNumber", "==", luckyNumber)
+      .get()
+      .then(data => {
+        if (data.empty) similar = true;
+      })
+      .catch(() =>
+        res.status(500).json({ error: "something went wrong, try again" })
+      );
+    if (!similar) luckyNumber = randomize("0", 3);
+  }
+  const user = {
+    email: req.body.email,
+    checked: {
+      checkedIn: true,
+      checkedAt: new Date().toISOString()
+    },
+    gifts: {
+      luckyNumber: luckyNumber,
+      set: "",
+      taken: false,
+      takenAt: ""
+    },
+    createdAt: new Date().toISOString()
+  };
+  const { errors, invalid } = validateRegister(user.email, "none", "none");
+  if (invalid) return res.status(500).json(errors);
+  firestore
+    .collection("users")
+    .where("email", "==", user.email)
+    .get()
+    .then(data => {
+      if (data.empty) {
+        firestore
+          .collection("users")
+          .add(user)
+          .then(doc => {
+            user.id = doc.id;
+            res.json(user);
+          })
+          .catch(() =>
+            res.status(500).json({ error: "something went wrong, try again" })
+          );
+      } else
+        data.forEach(doc => {
+          return res.json(doc.data())
+        })
     })
     .catch(() =>
       res.status(500).json({ error: "something went wrong, try again" })

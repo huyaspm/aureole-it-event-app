@@ -109,6 +109,12 @@ img.background {
   }
 }
 
+.year-end-timer {
+  #timer .time {
+    color: #E5C100 !important;
+  }
+}
+
 @media (max-width: 767.98px) {
   .slider-text h1 {
     font-size: 24px;
@@ -214,6 +220,13 @@ img.background {
   display: block;
   color: #000000;
   text-transform: uppercase;
+}
+
+.form-group .btn-warning {
+  width: 100%;
+  display: block !important;
+  background-color: #E5C100 !important;
+  border-color: #E5C100 !important;
 }
 
 .event-form {

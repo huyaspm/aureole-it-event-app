@@ -98,7 +98,7 @@ function Signin(props) {
         <input
           type="submit"
           value="Đăng ký"
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-warning py-3 px-4"
         />
       </div>
       <div className="form-group text-center"></div>
@@ -128,7 +128,7 @@ function Signin(props) {
         <input
           type="submit"
           value="Xác thực"
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-warning py-3 px-4"
         />
       </div>
       <div className="form-group text-center"></div>

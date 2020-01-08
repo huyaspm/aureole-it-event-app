@@ -14,6 +14,7 @@ const Template = lazy(() => import("./pages/christmas/template"));
 const ManagerRoute = lazy(() => import("./route/manager"));
 const Manager = lazy(() => import("./pages/root/manager"));
 const Checker = lazy(() => import("./pages/root/checker"));
+const EmailChecker = lazy(() => import("./pages/root/email-checker"));
 const Giver = lazy(() => import("./pages/root/giver"));
 const Spinner = lazy(() => import("./pages/root/spinner"));
 const Admin = lazy(() => import("./pages/root/admin"));
@@ -40,11 +41,7 @@ function App() {
         <Router>
           <Suspense
             fallback={
-              <img
-                src="/images/new-year-background.jpg"
-                className="background"
-                alt="background"
-              />
+              <div />
             }
           >
             <Switch>
@@ -55,6 +52,7 @@ function App() {
               <Route exact path="/root" component={Manager} />
      
               <ManagerRoute exact path="/root/scanner" component={Checker} />
+              <ManagerRoute exact path="/root/scanner/email" component={EmailChecker} />
               <ManagerRoute exact path="/root/giver" component={Giver} />
               <ManagerRoute
                 exact

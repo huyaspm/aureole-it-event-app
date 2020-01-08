@@ -124,6 +124,14 @@ function Manager(props) {
           <strong>Quét điểm danh</strong>
         </button>
       </div>
+      <div className="form-group">
+        <button
+          onClick={() => props.history.push("/root/scanner/email")}
+          className="btn btn-light py-3 px-4" 
+        >
+          <strong>Điểm danh bằng Email</strong>
+        </button>
+      </div>
       <div className="form-group mt-4">
         <button
           onClick={() => props.history.push("/root/giver")}

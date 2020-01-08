@@ -18,7 +18,8 @@ const {
   scan,
   give,
   gift,
-  lucky
+  lucky,
+  email
 } = require("./handlers/managers");
 
 const {
@@ -42,6 +43,7 @@ app.post("/manager/scan", scan);
 app.post("/manager/give", give);
 app.post("/manager/gift", gift);
 app.post("/manager/lucky", lucky);
+app.post("/manager/scan/email", email);
 
 app.get("/gift/wishes", getWishes);
 app.post("/gifts/", getGifts);

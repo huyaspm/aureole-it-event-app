@@ -85,9 +85,9 @@ function Homepage(props) {
             signOut();
             props.history.push("/sign-in");
           }}
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-warning py-3 px-4"
         >
-          <strong>Đăng xuất</strong>
+          Đăng xuất
         </button>
       </div>
     </div>
@@ -143,9 +143,9 @@ function Homepage(props) {
             signOut();
             props.history.push("/sign-in");
           }}
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-warning py-3 px-4"
         >
-          <strong>Đăng xuất</strong>
+          Đăng xuất
         </button>
       </div>
     </div>
@@ -193,9 +193,9 @@ function Homepage(props) {
             signOut();
             props.history.push("/sign-in");
           }}
-          className="btn btn-primary py-3 px-4"
+          className="btn btn-warning py-3 px-4"
         >
-          <strong>Đăng xuất</strong>
+          Đăng xuất
         </button>
       </div>
     </div>
